@@ -1,157 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Niem Vannara Portfolio</title>
+    <title>Niem Vannara — Data Engineer & Analyst</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <span class="logo-text">AURA Junior</span>
+                <span class="logo-text">AURA<span class="logo-accent">Jr</span></span>
             </div>
             <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#skills" class="nav-link">Skills</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#experience" class="nav-link">Experience</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#certificates" class="nav-link">Certificates</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun" id="themeIcon"></i>
+                </button>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <<!-- Hero Section -->
-<section id="home" class="hero">
-    <div class="hero-particles">
-        <span></span><span></span><span></span>
-        <span></span><span></span><span></span>
-    </div>
-    <div class="hero-container">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span class="badge-dot"></span>
-                Available for Internship & Projects
-            </div>
-            <h1 class="hero-title">
-                Hello, I'm <span class="highlight">Vannara</span>
-            </h1>
-            <p class="hero-subtitle">
-                Data Science and Engineering Student<br>
-                <span class="hero-subtitle-tag">Royal University of Phnom Penh · Gen 4</span>
-            </p>
-            <p class="hero-description">
-                Aspiring Data Engineer & Analyst building real-world pipelines,
-                data models, and analytics solutions.
-            </p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">
-                    <i class="fas fa-envelope"></i> Get In Touch
-                </a>
-                <a href="#projects" class="btn btn-secondary">
-                    <i class="fas fa-folder-open"></i> View Projects
-                </a>
-            </div>
-            <div class="hero-tech-chips">
-                <span class="chip">Python |</span>
-                <span class="chip">SQL |</span>
-                <span class="chip">ETL |</span>
-                <span class="chip">Database |</span>
-                <span class="chip">Data analysis and Engineering</span>
-            </div>
+    <section id="home" class="hero">
+        <div class="hero-particles">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
         </div>
-
-        <div class="hero-visual">
-            <div class="profile-wrapper">
-                <div class="profile-ring ring-1"></div>
-                <div class="profile-ring ring-2"></div>
-                <div class="profile-img-container">
-                    <!-- 🔴 Replace "your-photo.jpg" with your actual photo file name -->
-                    <img src="image/my photo.jpg" alt="Vannara" class="profile-img" id="profileImg" width="300">
-                    <!-- Fallback avatar shown if no photo -->
-                    <div class="profile-avatar-fallback" id="avatarFallback">
-                        <i class="fas fa-user"></i>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    Available for Internship &amp; Projects
+                </div>
+                <h1 class="hero-title">
+                    Hello, I'm<br><span class="highlight">Niem Vannara</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Data Science &amp; Engineering Student
+                    <span class="hero-subtitle-tag">Royal University of Phnom Penh · Gen 4</span>
+                </p>
+                <p class="hero-description">
+                    Aspiring Data Engineer &amp; Analyst — building real-world pipelines,
+                    data models, and analytics solutions from Cambodia 🇰🇭
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary"><i class="fas fa-envelope"></i> Get In Touch</a>
+                    <a href="#projects" class="btn btn-secondary"><i class="fas fa-folder-open"></i> View Projects</a>
+                </div>
+                <div class="hero-tech-chips">
+                    <span class="chip"><i class="fab fa-python"></i> Python</span>
+                    <span class="chip"><i class="fas fa-database"></i> SQL</span>
+                    <span class="chip"><i class="fas fa-project-diagram"></i> ETL</span>
+                    <span class="chip"><i class="fas fa-chart-bar"></i> Analytics</span>
+                    <span class="chip"><i class="fas fa-brain"></i> ML &amp; AI</span>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="profile-wrapper">
+                    <div class="profile-ring ring-1"></div>
+                    <div class="profile-ring ring-2"></div>
+                    <div class="profile-img-container">
+                        <img src="image/my photo.jpg" alt="Niem Vannara" class="profile-img" id="profileImg">
+                        <div class="profile-avatar-fallback" id="avatarFallback">
+                            <i class="fas fa-user"></i>
+                        </div>
                     </div>
-                </div>
-                <div class="floating-badge badge-python">
-                    <i class="fab fa-python"></i> Python
-                </div>
-                <div class="floating-badge badge-sql">
-                    <i class="fas fa-database"></i> SQL
-                </div>
-                <div class="floating-badge badge-data">
-                    <i class="fas fa-chart-bar"></i> Analytics and Engineer
-                </div>
-                <div class="floating-badge badge-etl">
-                    <i class="fas fa-project-diagram"></i> ETL
+                    <div class="floating-badge badge-python"><i class="fab fa-python"></i> Python</div>
+                    <div class="floating-badge badge-sql"><i class="fas fa-database"></i> SQL</div>
+                    <div class="floating-badge badge-data"><i class="fas fa-chart-bar"></i> Analytics</div>
+                    <div class="floating-badge badge-etl"><i class="fas fa-project-diagram"></i> ETL</div>
+                    <div class="floating-badge badge-ml"><i class="fas fa-brain"></i> ML &amp; AI</div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+        <a href="#about" class="scroll-down-btn">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
 
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
+            <div class="section-header">
+                <span class="section-tag">Who I Am</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="about-grid">
                 <div class="about-text">
-                    <p class="about-description">
-                        I am a passionate Computer Science and Data Science student,
-                        dedicated to designing and building robust software systems and modern web applications. 
-                        I combine AI, Big Data, Software Development and IoT technologies to create innovative, 
-                        practical, and scalable solutions
+                    <p class="about-lead">
+                        I'm <strong>Niem Vannara</strong>, a Year 2 Data Science &amp; Engineering student at RUPP,
+                        passionate about turning raw data into meaningful insights and scalable systems.
                     </p>
-                    <p class="about-description">
-                        My expertise lies in cloud-native data engineering, having successfully migrated legacy BI stacks 
-                        to modern cloud architectures. I've implemented data quality frameworks, built real-time ingestion 
-                        pipelines, and designed dimensional data models that empower analysts and data scientists.
+                    <p class="about-body">
+                        My goal is to become a professional <strong>Data Engineer</strong> and <strong>Data Analyst</strong>
+                        after graduating. I enjoy working with databases, building ETL pipelines, and exploring machine
+                        learning models. I believe data is the foundation of smart decisions.
                     </p>
-                    <div class="about-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-cloud"></i>
-                            <span>Cloud-Native Architecture</span>
+                    <p class="about-body">
+                        Outside of studying, I work on personal projects to apply what I learn — from data pipelines
+                        to dashboards and predictive models. I'm always curious, always building.
+                    </p>
+                    <div class="about-info-grid">
+                        <div class="info-item">
+                            <i class="fas fa-university"></i>
+                            <div>
+                                <span class="info-label">University</span>
+                                <span class="info-value">Royal University of Phnom Penh</span>
+                            </div>
                         </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Performance Optimization</span>
+                        <div class="info-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <span class="info-label">Major</span>
+                                <span class="info-value">Data Science &amp; Engineering</span>
+                            </div>
                         </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Data Quality & Governance</span>
+                        <div class="info-item">
+                            <i class="fas fa-layer-group"></i>
+                            <div>
+                                <span class="info-label">Generation</span>
+                                <span class="info-value">Gen 4</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span class="info-label">Location</span>
+                                <span class="info-value">Phnom Penh, Cambodia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-goals">
+                        <div class="goal-card">
+                            <i class="fas fa-road"></i>
+                            <div>
+                                <h4>Career Goal</h4>
+                                <p>Data Engineer &amp; Data Analyst Specialist</p>
+                            </div>
+                        </div>
+                        <div class="goal-card">
+                            <i class="fas fa-rocket"></i>
+                            <div>
+                                <h4>Current Focus</h4>
+                                <p>Building pipelines, SQL mastery &amp; ML fundamentals</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="about-image">
-                    <div class="tech-stack-preview">
-                        <div class="tech-item">Snowflake</div>
-                        <div class="tech-item">dbt</div>
-                        <div class="tech-item">Airflow</div>
-                        <div class="tech-item">AWS</div>
-                        <div class="tech-item">Python</div>
+                <div class="about-stats-col">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-code"></i></div>
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Projects Built</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="stat-number">3+</div>
+                        <div class="stat-label">Certificates</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-database"></i></div>
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Years Studying</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-fire"></i></div>
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Passion for Data</div>
+                    </div>
+                    <div class="roadmap-card">
+                        <h4><i class="fas fa-map"></i> My Roadmap</h4>
+                        <div class="roadmap-steps">
+                            <div class="roadmap-step done">
+                                <span class="step-dot"></span>
+                                <span>Learn Python &amp; SQL</span>
+                            </div>
+                            <div class="roadmap-step done">
+                                <span class="step-dot"></span>
+                                <span>Study Data Engineering</span>
+                            </div>
+                            <div class="roadmap-step active">
+                                <span class="step-dot"></span>
+                                <span>Build Real Projects</span>
+                            </div>
+                            <div class="roadmap-step">
+                                <span class="step-dot"></span>
+                                <span>Get Internship</span>
+                            </div>
+                            <div class="roadmap-step">
+                                <span class="step-dot"></span>
+                                <span>Graduate &amp; Work as DE/DA</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -161,130 +219,211 @@
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3 class="category-title">
-                        <i class="fas fa-code"></i>
-                        Programming Languages
-                    </h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Python</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
-                            </div>
+            <div class="section-header">
+                <span class="section-tag">What I Know</span>
+                <h2 class="section-title">Technical Skills</h2>
+            </div>
+            <div class="skills-tabs">
+                <button class="skills-tab active" data-tab="languages">
+                    <i class="fas fa-code"></i> Languages
+                </button>
+                <button class="skills-tab" data-tab="data">
+                    <i class="fas fa-database"></i> Data &amp; DB
+                </button>
+                <button class="skills-tab" data-tab="tools">
+                    <i class="fas fa-tools"></i> Tools &amp; Frameworks
+                </button>
+                <button class="skills-tab" data-tab="soft">
+                    <i class="fas fa-brain"></i> Soft Skills
+                </button>
+            </div>
+
+            <div class="skills-panel active" id="tab-languages">
+                <div class="skills-grid">
+                    <div class="skill-bar-card">
+                        <div class="skill-bar-header">
+                            <span class="skill-name"><i class="fab fa-python"></i> Python</span>
+                            <span class="skill-pct">80%</span>
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">SQL</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:80%"></div></div>
+                    </div>
+                    <div class="skill-bar-card">
+                        <div class="skill-bar-header">
+                            <span class="skill-name"><i class="fas fa-database"></i> SQL</span>
+                            <span class="skill-pct">75%</span>
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Java</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 75%"></div>
-                            </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:75%"></div></div>
+                    </div>
+                    <div class="skill-bar-card">
+                        <div class="skill-bar-header">
+                            <span class="skill-name"><i class="fab fa-java"></i> Java</span>
+                            <span class="skill-pct">55%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:55%"></div></div>
+                    </div>
+                    <div class="skill-bar-card">
+                        <div class="skill-bar-header">
+                            <span class="skill-name"><i class="fab fa-js"></i> JavaScript</span>
+                            <span class="skill-pct">50%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:50%"></div></div>
+                    </div>
+                    <div class="skill-bar-card">
+                        <div class="skill-bar-header">
+                            <span class="skill-name"><i class="fas fa-terminal"></i> Bash / Shell</span>
+                            <span class="skill-pct">45%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:45%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-panel" id="tab-data">
+                <div class="skills-grid">
+                    <div class="skill-bar-card">
+                        <div class="skill-bar-header">
+                            <span class="skill-name"><i class="fas fa-database"></i> MySQL / PostgreSQL</span>
+                            <span class="skill-pct">75%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:75%"></div></div>
+                    </div>
+                    <div class="skill-bar-card">
+                        <div class="skill-bar-header">
+                            <span class="skill-name"><i class="fas fa-table"></i> Pandas / NumPy</span>
+                            <span class="skill-pct">70%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:70%"></div></div>
+                    </div>
+                    <div class="skill-bar-card">
+                        <div class="skill-bar-header">
+                            <span class="skill-name"><i class="fas fa-chart-line"></i> Data Visualization</span>
+                            <span class="skill-pct">65%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:65%"></div></div>
+                    </div>
+                    <div class="skill-bar-card">
+                        <div class="skill-bar-header">
+                            <span class="skill-name"><i class="fas fa-project-diagram"></i> ETL Pipelines</span>
+                            <span class="skill-pct">60%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:60%"></div></div>
+                    </div>
+                    <div class="skill-bar-card">
+                        <div class="skill-bar-header">
+                            <span class="skill-name"><i class="fas fa-brain"></i> Machine Learning</span>
+                            <span class="skill-pct">55%</span>
+                        </div>
+                        <div class="skill-bar"><div class="skill-progress" style="width:55%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-panel" id="tab-tools">
+                <div class="tools-icon-grid">
+                    <div class="tool-chip"><i class="fab fa-git-alt"></i> Git</div>
+                    <div class="tool-chip"><i class="fab fa-github"></i> GitHub</div>
+                    <div class="tool-chip"><i class="fas fa-wind"></i> Apache Airflow</div>
+                    <div class="tool-chip"><img src="https://img.icons8.com/color/20/power-bi.png" alt=""> Power BI</div>
+                    <div class="tool-chip"><i class="fas fa-chart-bar"></i> Tableau</div>
+                    <div class="tool-chip"><i class="fab fa-docker"></i> Docker</div>
+                    <div class="tool-chip"><i class="fab fa-aws"></i> AWS (Basic)</div>
+                    <div class="tool-chip"><i class="fas fa-server"></i> Linux</div>
+                    <div class="tool-chip"><i class="fas fa-book"></i> Jupyter</div>
+                    <div class="tool-chip"><i class="fas fa-code"></i> VS Code</div>
+                    <div class="tool-chip"><i class="fas fa-snowflake"></i> Snowflake</div>
+                    <div class="tool-chip"><i class="fas fa-cogs"></i> dbt</div>
+                </div>
+            </div>
+
+            <div class="skills-panel" id="tab-soft">
+                <div class="soft-skills-grid">
+                    <div class="soft-card">
+                        <div class="soft-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h4>Problem Solving</h4>
+                        <p>Breaking down complex data problems into manageable solutions</p>
+                    </div>
+                    <div class="soft-card">
+                        <div class="soft-icon"><i class="fas fa-users"></i></div>
+                        <h4>Teamwork</h4>
+                        <p>Collaborating effectively in group projects and study teams</p>
+                    </div>
+                    <div class="soft-card">
+                        <div class="soft-icon"><i class="fas fa-book-open"></i></div>
+                        <h4>Fast Learner</h4>
+                        <p>Quickly adapting to new tools, frameworks, and technologies</p>
+                    </div>
+                    <div class="soft-card">
+                        <div class="soft-icon"><i class="fas fa-comments"></i></div>
+                        <h4>Communication</h4>
+                        <p>Explaining technical concepts clearly to non-technical audiences</p>
+                    </div>
+                    <div class="soft-card">
+                        <div class="soft-icon"><i class="fas fa-clock"></i></div>
+                        <h4>Time Management</h4>
+                        <p>Balancing coursework, projects, and self-learning effectively</p>
+                    </div>
+                    <div class="soft-card">
+                        <div class="soft-icon"><i class="fas fa-search"></i></div>
+                        <h4>Analytical Thinking</h4>
+                        <p>Data-driven approach to decision making and problem solving</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="certificates">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">My Achievements</span>
+                <h2 class="section-title">Certificates &amp; Awards</h2>
+            </div>
+            <div class="certs-grid">
+                <div class="cert-card">
+                    <div class="cert-icon cert-blue"><i class="fab fa-python"></i></div>
+                    <div class="cert-body">
+                        <span class="cert-issuer">Coursera / Google</span>
+                        <h3 class="cert-title">Python for Everybody</h3>
+                        <p class="cert-desc">Fundamentals of Python programming including data structures, web scraping, and databases.</p>
+                        <div class="cert-footer">
+                            <span class="cert-date"><i class="far fa-calendar-alt"></i> 2024</span>
+                            <a href="#" class="cert-link">View <i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                 </div>
-
-                <div class="skill-category">
-                    <h3 class="category-title">
-                        <i class="fas fa-database"></i>
-                        Data Platforms
-                    </h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Snowflake</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">PostgreSQL</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Oracle</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">DuckDB</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 70%"></div>
-                            </div>
+                <div class="cert-card">
+                    <div class="cert-icon cert-green"><i class="fas fa-database"></i></div>
+                    <div class="cert-body">
+                        <span class="cert-issuer">Coursera</span>
+                        <h3 class="cert-title">SQL for Data Science</h3>
+                        <p class="cert-desc">Writing complex queries, joins, subqueries and using SQL for data analysis and reporting.</p>
+                        <div class="cert-footer">
+                            <span class="cert-date"><i class="far fa-calendar-alt"></i> 2024</span>
+                            <a href="#" class="cert-link">View <i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                 </div>
-
-                <div class="skill-category">
-                    <h3 class="category-title">
-                        <i class="fas fa-cogs"></i>
-                        ETL & Orchestration
-                    </h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Apache Airflow</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">dbt</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">AWS Glue</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Fivetran</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 75%"></div>
-                            </div>
+                <div class="cert-card">
+                    <div class="cert-icon cert-orange"><i class="fas fa-chart-bar"></i></div>
+                    <div class="cert-body">
+                        <span class="cert-issuer">DataCamp</span>
+                        <h3 class="cert-title">Data Analysis with Python</h3>
+                        <p class="cert-desc">Pandas, NumPy, Matplotlib for data wrangling, visualization and exploratory analysis.</p>
+                        <div class="cert-footer">
+                            <span class="cert-date"><i class="far fa-calendar-alt"></i> 2024</span>
+                            <a href="#" class="cert-link">View <i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                 </div>
-
-                <div class="skill-category">
-                    <h3 class="category-title">
-                        <i class="fas fa-cloud"></i>
-                        Cloud & Tools
-                    </h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">AWS</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Tableau</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Power BI</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Domo</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
+                <div class="cert-card cert-placeholder">
+                    <div class="cert-icon cert-purple"><i class="fas fa-plus"></i></div>
+                    <div class="cert-body">
+                        <span class="cert-issuer">Coming Soon</span>
+                        <h3 class="cert-title">Add Your Certificate</h3>
+                        <p class="cert-desc">Replace this card with your next certificate — AWS, dbt, Airflow, Tableau, etc.</p>
+                        <div class="cert-footer">
+                            <span class="cert-date"><i class="far fa-calendar-alt"></i> 2025</span>
                         </div>
                     </div>
                 </div>
@@ -295,87 +434,84 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
+            <div class="section-header">
+                <span class="section-tag">What I've Built</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
             <div class="projects-grid">
                 <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Real-Time Logistics Data Pipeline</h3>
-                        <div class="project-tech">
-                            <span class="tech-tag">Airflow</span>
-                            <span class="tech-tag">Snowflake</span>
-                            <span class="tech-tag">Python</span>
+                    <div class="project-top">
+                        <div class="project-icon"><i class="fas fa-project-diagram"></i></div>
+                        <div class="project-links">
+                            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
+                    <h3 class="project-title">ETL Data Pipeline</h3>
                     <p class="project-description">
-                        Designed near real-time ingestion pipelines for logistics APIs (FedEx, UPS), 
-                        transforming JSON streams into Snowflake datasets that powered delivery tracking 
-                        and exception monitoring.
+                        Built an ETL pipeline using Python and SQL to extract data from APIs, transform it,
+                        and load it into a PostgreSQL database with automated scheduling.
                     </p>
-                    <div class="project-features">
-                        <span class="feature">Real-time Processing</span>
-                        <span class="feature">API Integration</span>
-                        <span class="feature">Exception Monitoring</span>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Airflow</span>
                     </div>
                 </div>
-
                 <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">E-commerce Data Modernization</h3>
-                        <div class="project-tech">
-                            <span class="tech-tag">Snowflake</span>
-                            <span class="tech-tag">dbt</span>
-                            <span class="tech-tag">Airflow</span>
+                    <div class="project-top">
+                        <div class="project-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="project-links">
+                            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
+                    <h3 class="project-title">Sales Data Dashboard</h3>
                     <p class="project-description">
-                        Modernized the BI stack by migrating from Domo → Snowflake + dbt, creating a 
-                        modular, cloud-native architecture that enabled cost optimization ($100K annual savings) 
-                        and faster experimentation.
+                        Created an interactive dashboard analyzing sales trends, customer segments,
+                        and KPIs using Python Pandas and Power BI visualizations.
                     </p>
-                    <div class="project-features">
-                        <span class="feature">Architecture Migration</span>
-                        <span class="feature">Cost Optimization</span>
-                        <span class="feature">Modular Design</span>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">Power BI</span>
                     </div>
                 </div>
-
                 <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Serverless 3PL Data Pipeline</h3>
-                        <div class="project-tech">
-                            <span class="tech-tag">AWS Lambda</span>
-                            <span class="tech-tag">AWS Glue</span>
-                            <span class="tech-tag">Python</span>
+                    <div class="project-top">
+                        <div class="project-icon"><i class="fas fa-brain"></i></div>
+                        <div class="project-links">
+                            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
+                    <h3 class="project-title">ML Prediction Model</h3>
                     <p class="project-description">
-                        Developed serverless pipelines (AWS Lambda, Glue) to ingest 3PL vendor data, 
-                        handling schema drift and metadata logging for 1,000+ daily file drops.
+                        Developed a machine learning model to predict outcomes using Scikit-learn,
+                        with data preprocessing, feature engineering, and model evaluation.
                     </p>
-                    <div class="project-features">
-                        <span class="feature">Serverless Architecture</span>
-                        <span class="feature">Schema Drift Handling</span>
-                        <span class="feature">High Volume Processing</span>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">Jupyter</span>
                     </div>
                 </div>
-
                 <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Data Quality Framework</h3>
-                        <div class="project-tech">
-                            <span class="tech-tag">Great Expectations</span>
-                            <span class="tech-tag">Airflow</span>
-                            <span class="tech-tag">CloudWatch</span>
+                    <div class="project-top">
+                        <div class="project-icon"><i class="fas fa-database"></i></div>
+                        <div class="project-links">
+                            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
+                    <h3 class="project-title">Database Design System</h3>
                     <p class="project-description">
-                        Implemented data quality framework with Great Expectations, in-pipeline tests, 
-                        Airflow alerts, and CloudWatch logs, reducing data issues by 40% through early detection.
+                        Designed and normalized a relational database schema for a student management
+                        system with complex queries, stored procedures and indexing.
                     </p>
-                    <div class="project-features">
-                        <span class="feature">Data Quality</span>
-                        <span class="feature">Automated Testing</span>
-                        <span class="feature">Monitoring & Alerting</span>
+                    <div class="project-tech">
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">ERD Design</span>
                     </div>
                 </div>
             </div>
@@ -385,74 +521,74 @@
     <!-- Experience Section -->
     <section id="experience" class="experience">
         <div class="container">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3 class="timeline-title">Associate Manager, Data Warehouse</h3>
-                            <span class="timeline-company">E-commerce Retail Company</span>
-                            <span class="timeline-period">2022 - Present</span>
-                        </div>
-                        <ul class="timeline-achievements">
-                            <li>Led data architecture modernization from Domo to Snowflake + dbt, achieving $100K annual cost savings</li>
-                            <li>Implemented comprehensive data quality framework reducing data issues by 40%</li>
-                            <li>Designed and built real-time data pipelines for logistics APIs (FedEx, UPS)</li>
-                            <li>Managed team of data engineers and analysts</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="section-header">
+                <span class="section-tag">My Journey</span>
+                <h2 class="section-title">Education &amp; Experience</h2>
+            </div>
+            <div class="timeline-wrapper">
+                <div class="timeline">
 
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3 class="timeline-title">Senior Data Engineer</h3>
-                            <span class="timeline-company">E-commerce Retail Company</span>
-                            <span class="timeline-period">2020 - 2022</span>
+                    <div class="timeline-item" data-type="edu">
+                        <div class="timeline-dot"><i class="fas fa-university"></i></div>
+                        <div class="timeline-card">
+                            <div class="timeline-type edu-type">Education</div>
+                            <h3 class="timeline-title">Bachelor of Data Science &amp; Engineering</h3>
+                            <span class="timeline-place">Royal University of Phnom Penh</span>
+                            <span class="timeline-period"><i class="far fa-calendar-alt"></i> 2023 — Present</span>
+                            <ul class="timeline-list">
+                                <li>Studying data structures, algorithms, and database systems</li>
+                                <li>Learning Python, SQL, machine learning, and data pipelines</li>
+                                <li>Working on group projects applying real-world data engineering concepts</li>
+                                <li>Generation 4 student — actively building portfolio projects</li>
+                            </ul>
                         </div>
-                        <ul class="timeline-achievements">
-                            <li>Built serverless ETL pipelines using AWS Lambda and Glue</li>
-                            <li>Developed daily Airflow DAGs for third-party API integrations</li>
-                            <li>Created dimensional data models with SCD Type 2 implementation</li>
-                            <li>Optimized query performance and data warehouse costs</li>
-                        </ul>
                     </div>
-                </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3 class="timeline-title">Data Engineer</h3>
-                            <span class="timeline-company">E-commerce Retail Company</span>
-                            <span class="timeline-period">2018 - 2020</span>
+                    <div class="timeline-item" data-type="proj">
+                        <div class="timeline-dot"><i class="fas fa-code"></i></div>
+                        <div class="timeline-card">
+                            <div class="timeline-type proj-type">Personal Project</div>
+                            <h3 class="timeline-title">ETL Pipeline Development</h3>
+                            <span class="timeline-place">Self-Directed Learning</span>
+                            <span class="timeline-period"><i class="far fa-calendar-alt"></i> 2024</span>
+                            <ul class="timeline-list">
+                                <li>Built end-to-end ETL pipeline using Python and PostgreSQL</li>
+                                <li>Automated data extraction from public APIs</li>
+                                <li>Implemented data transformation and quality checks</li>
+                            </ul>
                         </div>
-                        <ul class="timeline-achievements">
-                            <li>Developed ETL pipelines for Netsuite, Shopify, and other business systems</li>
-                            <li>Built data models for BI analysts and data scientists</li>
-                            <li>Implemented data validation and quality checks</li>
-                            <li>Collaborated with business stakeholders on data requirements</li>
-                        </ul>
                     </div>
-                </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3 class="timeline-title">Data Analyst</h3>
-                            <span class="timeline-company">E-commerce Retail Company</span>
-                            <span class="timeline-period">2016 - 2018</span>
+                    <div class="timeline-item" data-type="learn">
+                        <div class="timeline-dot"><i class="fas fa-certificate"></i></div>
+                        <div class="timeline-card">
+                            <div class="timeline-type cert-type">Online Learning</div>
+                            <h3 class="timeline-title">Data Engineering Specialization</h3>
+                            <span class="timeline-place">Coursera / DataCamp / YouTube</span>
+                            <span class="timeline-period"><i class="far fa-calendar-alt"></i> 2023 — Present</span>
+                            <ul class="timeline-list">
+                                <li>Completed Python for Everybody &amp; SQL for Data Science courses</li>
+                                <li>Studied Apache Airflow, dbt, and cloud data platforms</li>
+                                <li>Practicing data analysis and ML through online platforms</li>
+                            </ul>
                         </div>
-                        <ul class="timeline-achievements">
-                            <li>Created reports and dashboards using Domo and Tableau</li>
-                            <li>Performed data analysis for business insights</li>
-                            <li>Developed SQL queries for ad-hoc analysis</li>
-                            <li>Supported business teams with data-driven decision making</li>
-                        </ul>
                     </div>
+
+                    <div class="timeline-item" data-type="goal">
+                        <div class="timeline-dot"><i class="fas fa-flag"></i></div>
+                        <div class="timeline-card future-card">
+                            <div class="timeline-type goal-type">Future Goal</div>
+                            <h3 class="timeline-title">Internship as Data Engineer / Analyst</h3>
+                            <span class="timeline-place">Target: Tech Company in Cambodia / Remote</span>
+                            <span class="timeline-period"><i class="far fa-calendar-alt"></i> 2025 — 2026</span>
+                            <ul class="timeline-list">
+                                <li>Seeking internship to apply real-world data engineering skills</li>
+                                <li>Goal: Work with production-level pipelines and data systems</li>
+                                <li>Open to both local and international remote opportunities</li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -461,41 +597,70 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Ready to discuss your data engineering needs?</h3>
-                    <p>I'm always interested in new opportunities and exciting data challenges. Let's connect!</p>
+            <div class="section-header">
+                <span class="section-tag">Let's Connect</span>
+                <h2 class="section-title">Get In Touch</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-left">
+                    <p class="contact-intro">
+                        I'm currently looking for internship opportunities in Data Engineering or Data Analysis.
+                        Whether you have an opportunity, a project idea, or just want to connect — my inbox is open!
+                    </p>
                     <div class="contact-methods">
-                        <div class="contact-method">
-                            <i class="fas fa-envelope"></i>
-                            <span>Email me directly</span>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fab fa-linkedin"></i>
-                            <span>Connect on LinkedIn</span>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fab fa-github"></i>
-                            <span>View my code</span>
-                        </div>
+                        <a href="mailto:your@email.com" class="contact-method">
+                            <div class="method-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <span class="method-label">Email</span>
+                                <span class="method-value">your@email.com</span>
+                            </div>
+                        </a>
+                        <a href="#" class="contact-method">
+                            <div class="method-icon"><i class="fab fa-linkedin"></i></div>
+                            <div>
+                                <span class="method-label">LinkedIn</span>
+                                <span class="method-value">linkedin.com/in/niemvannara</span>
+                            </div>
+                        </a>
+                        <a href="#" class="contact-method">
+                            <div class="method-icon"><i class="fab fa-github"></i></div>
+                            <div>
+                                <span class="method-label">GitHub</span>
+                                <span class="method-value">github.com/niemvannara</span>
+                            </div>
+                        </a>
+                        <a href="#" class="contact-method">
+                            <div class="method-icon"><i class="fab fa-telegram"></i></div>
+                            <div>
+                                <span class="method-label">Telegram</span>
+                                <span class="method-value">@niemvannara</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                <div class="contact-right">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Your Name</label>
+                                <input type="text" name="name" placeholder="Kea Leanghong" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Your Email</label>
+                                <input type="email" name="email" placeholder="email@example.com" required>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            <label>Subject</label>
+                            <input type="text" name="subject" placeholder="Internship Opportunity" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                            <label>Message</label>
+                            <textarea name="message" placeholder="Tell me about the opportunity..." rows="5" required></textarea>
                         </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
                     </form>
                 </div>
             </div>
@@ -505,31 +670,35 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Data Engineer Portfolio</h4>
-                    <p>Building scalable data solutions that drive business value</p>
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <span class="logo-text">AURA<span class="logo-accent">Jr</span></span>
+                    <p>Building the future with data, one pipeline at a time.</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
+                <div class="footer-links">
+                    <h4>Navigate</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#certificates">Certificates</a></li>
                         <li><a href="#projects">Projects</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
+                <div class="footer-social">
                     <h4>Connect</h4>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <div class="social-row">
+                        <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-facebook"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Data Engineer Portfolio. All rights reserved.</p>
+                <p>© 2025 Niem Vannara. Built with ❤️ in Phnom Penh 🇰🇭</p>
+                <p class="footer-sub">Data Science &amp; Engineering · RUPP Gen 4</p>
             </div>
         </div>
     </footer>
