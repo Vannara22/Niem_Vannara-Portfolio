@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚀 Senior Data Engineer Portfolio Website
 
 A modern, professional portfolio website designed specifically for data engineers and data professionals. Built with HTML5, CSS3, and JavaScript, featuring a tech-focused design with professional blue color scheme.
