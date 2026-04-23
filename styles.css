@@ -843,3 +843,45 @@ section { padding: 90px 0; }
     .profile-wrapper { width: 240px; height: 240px; }
     .floating-badge { font-size: 0.65rem; padding: 4px 9px; }
 }
+.project-detail-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-light);
+    text-decoration: none;
+    transition: gap var(--transition);
+}
+.project-detail-btn:hover { gap: 10px; }
+.project-detail-btn i { font-size: 0.75rem; }
+
+/* Project badges */
+.project-badge {
+    display: inline-block;
+    font-size: 0.72rem; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+    margin-bottom: 8px;
+}
+.project-badge.competition {
+    background: rgba(251,191,36,0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(251,191,36,0.3);
+}
+.project-badge.wip {
+    background: rgba(251,146,60,0.15);
+    color: #fb923c;
+    border: 1px solid rgba(251,146,60,0.3);
+}
+.project-wip { border-style: dashed; }
+
+/* Project detail button */
+.project-detail-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 16px; font-size: 0.85rem; font-weight: 600;
+    color: var(--accent-light); text-decoration: none;
+    transition: gap var(--transition);
+}
+.project-detail-btn:hover { gap: 10px; }
+.project-detail-btn i { font-size: 0.75rem; }
