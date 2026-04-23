@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System — Niem Vannara</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background: var(--bg-primary); }
+        .proj-page { padding: 100px 0 80px; min-height: 100vh; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--accent-light); text-decoration: none; font-size: .88rem; font-weight: 600; margin-bottom: 32px; transition: gap .3s; }
+        .back-btn:hover { gap: 14px; }
+        .proj-label-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+        .proj-type-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 4px 12px; border-radius: 20px; background: var(--accent-glow); color: var(--accent-light); }
+        .proj-meta-inline { font-size: .82rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+        .proj-meta-inline i { font-size: .75rem; }
+        .dot { color: var(--border); }
+        .proj-page h1 { font-family: 'Syne', sans-serif; font-size: clamp(2rem,4vw,3rem); font-weight: 800; color: var(--text-primary); margin-bottom: 10px; line-height: 1.15; }
+        .proj-org { font-size: 1rem; color: var(--accent-light); font-weight: 600; margin-bottom: 32px; display: block; }
+
+        /* ERD Image */
+        .erd-wrapper {
+            width: 100%; border-radius: var(--radius); border: 1px solid var(--border);
+            margin-bottom: 40px; overflow: hidden; background: #fff;
+            cursor: pointer; position: relative;
+        }
+        .erd-wrapper img { width: 100%; display: block; transition: transform .3s; }
+        .erd-wrapper:hover img { transform: scale(1.01); }
+        .erd-zoom-hint {
+            position: absolute; bottom: 12px; right: 12px;
+            background: rgba(0,0,0,0.6); color: white;
+            font-size: .75rem; padding: 4px 10px; border-radius: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; padding: 20px; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 95vw; max-height: 90vh; border-radius: var(--radius); }
+        .lightbox-close { position: fixed; top: 20px; right: 24px; font-size: 2rem; color: white; cursor: pointer; background: none; border: none; }
+
+        /* Layout */
+        .proj-layout { display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: start; }
+        .proj-sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; margin-bottom: 18px; }
+        .proj-sidebar-card h3 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 14px; }
+        .tech-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+        .tech-chip { background: var(--accent-glow); color: var(--accent-light); padding: 4px 12px; border-radius: 20px; font-size: .75rem; font-weight: 600; }
+        .highlight-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+        .highlight-list li { display: flex; align-items: flex-start; gap: 8px; font-size: .85rem; color: var(--text-secondary); line-height: 1.6; }
+        .highlight-list li i { color: var(--green); font-size: .75rem; margin-top: 4px; flex-shrink: 0; }
+        .proj-link-btn { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); text-decoration: none; font-size: .88rem; font-weight: 600; transition: all .3s; margin-bottom: 10px; }
+        .proj-link-btn:hover { border-color: var(--accent); color: var(--accent-light); }
+        .proj-link-btn i { color: var(--accent-light); width: 18px; text-align: center; }
+        .author-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; text-align: center; }
+        .author-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--accent-glow); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; overflow: hidden; }
+        .author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .author-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .95rem; color: var(--text-primary); margin-bottom: 4px; }
+        .author-role { font-size: .78rem; color: var(--text-muted); margin-bottom: 14px; }
+        .author-links { display: flex; justify-content: center; gap: 8px; }
+        .author-link { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; font-size: .85rem; transition: all .3s; }
+        .author-link:hover { border-color: var(--accent); color: var(--accent-light); }
+
+        /* Content */
+        .proj-content h2 { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin: 36px 0 14px; }
+        .proj-content h2:first-child { margin-top: 0; }
+        .proj-content p { color: var(--text-secondary); line-height: 1.85; margin-bottom: 14px; font-size: .93rem; }
+        .proj-content ul { list-style: none; padding: 0; margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px; }
+        .proj-content ul li { padding-left: 18px; position: relative; color: var(--text-secondary); font-size: .9rem; line-height: 1.7; }
+        .proj-content ul li::before { content: '▸'; position: absolute; left: 0; color: var(--accent-light); }
+
+        /* Stats */
+        .stat-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 24px; }
+        .stat-b { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; text-align: center; }
+        .stat-b .n { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--accent-light); display: block; }
+        .stat-b .l { font-size: .72rem; color: var(--text-muted); }
+
+        /* Tables */
+        .proj-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: .86rem; }
+        .proj-table th { text-align: left; padding: 9px 14px; background: var(--bg-card); color: var(--text-muted); font-size: .7rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid var(--border); }
+        .proj-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+        .proj-table tr:hover td { background: var(--bg-card); }
+        code { background: var(--bg-card); padding: 2px 7px; border-radius: 4px; font-size: .82rem; color: var(--accent-light); font-family: monospace; }
+
+        /* Code block */
+        .code-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 20px; margin: 14px 0; overflow-x: auto; }
+        .code-block pre { margin: 0; color: #a9b7c6; font-family: monospace; font-size: .82rem; line-height: 1.7; white-space: pre; }
+        .code-block .kw { color: #cc7832; }
+        .code-block .fn { color: #ffc66d; }
+        .code-block .cm { color: #808080; font-style: italic; }
+        .code-block .st { color: #6a8759; }
+
+        /* Modules grid */
+        .modules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .module-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; }
+        .module-card .mhead { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+        .module-card .mhead i { color: var(--accent-light); font-size: .9rem; }
+        .module-card h4 { font-size: .85rem; font-weight: 700; color: var(--text-primary); }
+        .module-card p { font-size: .78rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+        .status-done { color: var(--green); font-size: .72rem; font-weight: 700; }
+        .status-wip  { color: var(--orange); font-size: .72rem; font-weight: 700; }
+
+        /* Group card */
+        .group-card { background: linear-gradient(135deg, rgba(59,130,246,.08), rgba(6,182,212,.04)); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 14px; }
+        .group-card h4 { font-size: .82rem; font-weight: 700; color: var(--accent-light); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .group-member { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; font-size: .85rem; color: var(--text-secondary); }
+        .group-member strong { color: var(--text-primary); min-width: 130px; }
+        .my-role { background: var(--accent-glow); color: var(--accent-light); padding: 2px 8px; border-radius: 10px; font-size: .7rem; font-weight: 700; margin-left: 6px; }
+
+        /* Nav */
+        .proj-bottom-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 40px; margin-top: 40px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 12px; }
+        .proj-nav-link { display: inline-flex; align-items: center; gap: 8px; color: var(--accent-light); text-decoration: none; font-size: .88rem; font-weight: 600; padding: 10px 18px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-card); transition: all .3s; }
+        .proj-nav-link:hover { border-color: var(--accent); }
+
+        @media (max-width: 900px) { .proj-layout { grid-template-columns: 1fr; } .stat-row { grid-template-columns: 1fr 1fr; } .modules-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo"><a href="../index.html" style="text-decoration:none;"><span class="logo-text">AURA<span class="logo-accent">Jr</span></span></a></div>
+        <div class="nav-right"><button class="theme-toggle" id="themeToggle"><i class="fas fa-sun" id="themeIcon"></i></button></div>
+    </div>
+</nav>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('active')">&times;</button>
+    <img src="../image/ER_Diagram.png" alt="ER Diagram Full">
+</div>
+
+<div class="proj-page">
+    <div class="container">
+        <a href="../index.html#projects" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+
+        <div class="proj-label-row">
+            <span class="proj-type-tag">Database Design · RDMS</span>
+            <span class="proj-meta-inline"><i class="fas fa-users"></i> Group Project (4 members)</span>
+            <span class="dot">·</span>
+            <span class="proj-meta-inline"><i class="far fa-calendar-alt"></i> 2025</span>
+            <span class="dot">·</span>
+            <span class="proj-meta-inline"><i class="fas fa-university"></i> RUPP — RDMS Course</span>
+        </div>
+
+        <h1>New School Information<br>Management System</h1>
+        <span class="proj-org">RDMS Course Project · Royal University of Phnom Penh</span>
+
+        <!-- ER Diagram with lightbox -->
+        <div class="erd-wrapper" onclick="document.getElementById('lightbox').classList.add('active')">
+            <img src="../image/ER_Diagram.png" alt="Entity Relationship Diagram — School Management System">
+            <span class="erd-zoom-hint"><i class="fas fa-search-plus"></i> Click to enlarge</span>
+        </div>
+
+        <div class="proj-layout">
+            <div class="proj-content">
+
+                <p>
+                    The <strong>New School Information System (SIS)</strong> is a complete database-driven system
+                    designed from scratch to replace an outdated manual school management process. Built as a
+                    group academic project for the RDMS course at RUPP, the system centralizes all school
+                    operations — from student enrollment and grade management to attendance tracking,
+                    fee payments, and automated notifications.
+                </p>
+
+                <h2>Project Overview</h2>
+                <p>
+                    The school currently faces critical operational problems: no centralized student data,
+                    a fully manual enrollment process, poor communication between teachers and parents,
+                    and no integration between academic and financial systems. This system solves all of
+                    these by providing a fully normalized relational database with <strong>15 tables</strong>
+                    serving <strong>8 stakeholder groups</strong>.
+                </p>
+
+                <div class="stat-row">
+                    <div class="stat-b"><span class="n">15</span><span class="l">Database Tables</span></div>
+                    <div class="stat-b"><span class="n">8</span><span class="l">Stakeholders</span></div>
+                    <div class="stat-b"><span class="n">3NF</span><span class="l">Normalization</span></div>
+                    <div class="stat-b"><span class="n">4</span><span class="l">User Roles</span></div>
+                </div>
+
+                <h2>Group Contribution</h2>
+                <div class="group-card">
+                    <h4><i class="fas fa-users"></i> &nbsp;Team Members</h4>
+                    <div class="group-member"><strong>Chhorn Roththida</strong><span>Business requirement & Stakeholder analysis</span></div>
+                    <div class="group-member"><strong>Doung Rachana</strong><span>Business requirement & Data requirement</span></div>
+                    <div class="group-member">
+                        <strong>Niem Vannara <span class="my-role">You</span></strong>
+                        <span>ER Diagram Design & Process Review</span>
+                    </div>
+                    <div class="group-member"><strong>Thy Sovanrina</strong><span>Database Relationships definition</span></div>
+                </div>
+
+                <h2>System Modules</h2>
+                <div class="modules-grid">
+                    <div class="module-card">
+                        <div class="mhead"><i class="fas fa-user-graduate"></i><h4>Student Management</h4></div>
+                        <p>Register, update, and track student records with medical info and parent links</p>
+                        <span class="status-done">✅ Completed</span>
+                    </div>
+                    <div class="module-card">
+                        <div class="mhead"><i class="fas fa-chalkboard-teacher"></i><h4>Teacher Management</h4></div>
+                        <p>Teacher profiles, specialization, hire date, and class assignments</p>
+                        <span class="status-done">✅ Completed</span>
+                    </div>
+                    <div class="module-card">
+                        <div class="mhead"><i class="fas fa-book"></i><h4>Course & Class Management</h4></div>
+                        <p>Define courses, credits, link to teachers, room numbers and academic year</p>
+                        <span class="status-done">✅ Completed</span>
+                    </div>
+                    <div class="module-card">
+                        <div class="mhead"><i class="fas fa-clipboard-list"></i><h4>Enrollment System</h4></div>
+                        <p>Online enrollment with document upload, approval workflow, and status tracking</p>
+                        <span class="status-done">✅ Completed</span>
+                    </div>
+                    <div class="module-card">
+                        <div class="mhead"><i class="fas fa-star-half-alt"></i><h4>Grade Management</h4></div>
+                        <p>Teachers enter scores by grade type and term with comments</p>
+                        <span class="status-done">✅ Completed</span>
+                    </div>
+                    <div class="module-card">
+                        <div class="mhead"><i class="fas fa-calendar-check"></i><h4>Attendance Tracking</h4></div>
+                        <p>Daily attendance per enrollment with status and remarks</p>
+                        <span class="status-done">✅ Completed</span>
+                    </div>
+                    <div class="module-card">
+                        <div class="mhead"><i class="fas fa-money-bill-wave"></i><h4>Fee & Payment System</h4></div>
+                        <p>Track fees per student, payment methods, due dates and payment status</p>
+                        <span class="status-done">✅ Completed</span>
+                    </div>
+                    <div class="module-card">
+                        <div class="mhead"><i class="fas fa-bell"></i><h4>Notifications</h4></div>
+                        <p>Automated alerts for grades, attendance, fees, and meetings per user</p>
+                        <span class="status-done">✅ Completed</span>
+                    </div>
+                    <div class="module-card">
+                        <div class="mhead"><i class="fas fa-running"></i><h4>Extracurricular Activities</h4></div>
+                        <p>Track student participation in activities with roles and achievements</p>
+                        <span class="status-done">✅ Completed</span>
+                    </div>
+                    <div class="module-card">
+                        <div class="mhead"><i class="fas fa-database"></i><h4>Backup & Recovery</h4></div>
+                        <p>Daily automated backup with logging in BACKUP_RECORDS table</p>
+                        <span class="status-done">✅ Completed</span>
+                    </div>
+                </div>
+
+                <h2>Database Design — 15 Tables</h2>
+                <table class="proj-table">
+                    <thead>
+                        <tr><th>Table</th><th>Purpose</th><th>Key Relationships</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>USERS</code></td><td>Central login accounts for all roles</td><td>1:1 with Students, Teachers, Parents</td></tr>
+                        <tr><td><code>STUDENTS</code></td><td>Student personal and academic records</td><td>→ USERS, PARENTS, ENROLLMENTS</td></tr>
+                        <tr><td><code>TEACHERS</code></td><td>Teacher profiles and specializations</td><td>→ USERS, CLASSES</td></tr>
+                        <tr><td><code>PARENTS</code></td><td>Parent/guardian contact information</td><td>→ USERS, STUDENTS</td></tr>
+                        <tr><td><code>COURSES</code></td><td>Course catalog with credits</td><td>→ CLASSES</td></tr>
+                        <tr><td><code>CLASSES</code></td><td>Course-teacher-semester mapping</td><td>→ COURSES, TEACHERS, ENROLLMENTS</td></tr>
+                        <tr><td><code>ENROLLMENTS</code></td><td>Student class registration records</td><td>→ STUDENTS, CLASSES, GRADES, ATTENDANCE</td></tr>
+                        <tr><td><code>GRADES</code></td><td>Score records by grade type and term</td><td>→ ENROLLMENTS</td></tr>
+                        <tr><td><code>ATTENDANCE</code></td><td>Daily attendance per enrollment</td><td>→ ENROLLMENTS</td></tr>
+                        <tr><td><code>FINANCIAL_FEES</code></td><td>Fee assignments per student</td><td>→ STUDENTS, PAYMENTS</td></tr>
+                        <tr><td><code>PAYMENTS</code></td><td>Payment records and methods</td><td>→ FINANCIAL_FEES</td></tr>
+                        <tr><td><code>NOTIFICATIONS</code></td><td>System alerts per user</td><td>→ USERS</td></tr>
+                        <tr><td><code>EXTRACURRICULAR_ACTIVITIES</code></td><td>Activity catalog managed by teachers</td><td>→ TEACHERS, STUDENT_ACTIVITIES</td></tr>
+                        <tr><td><code>STUDENT_ACTIVITIES</code></td><td>Student participation with composite PK</td><td>→ STUDENTS, ACTIVITIES</td></tr>
+                        <tr><td><code>BACKUP_RECORDS</code></td><td>Backup logs with timestamp and status</td><td>Independent</td></tr>
+                    </tbody>
+                </table>
+
+                <h2>Database Normalization</h2>
+                <ul>
+                    <li><strong>1NF</strong> — All columns contain atomic values, no repeating groups anywhere</li>
+                    <li><strong>2NF</strong> — All non-key attributes depend fully on the entire primary key</li>
+                    <li><strong>3NF</strong> — No transitive dependencies: each attribute depends only on the primary key</li>
+                    <li>Composite primary key used in <code>STUDENT_ACTIVITIES</code> (<code>student_id + activity_id</code>)</li>
+                    <li>All foreign key relationships enforced at database level</li>
+                </ul>
+
+                <h2>Sample SQL Queries</h2>
+
+                <div class="code-block"><pre><span class="cm">-- Get all enrolled students with their class and course info</span>
+<span class="kw">SELECT</span> s.first_name, s.last_name,
+       c.grade_level, co.course_name, e.enrollment_status
+<span class="kw">FROM</span> STUDENTS s
+<span class="kw">JOIN</span> ENROLLMENTS e <span class="kw">ON</span> s.student_id = e.student_id
+<span class="kw">JOIN</span> CLASSES c    <span class="kw">ON</span> e.class_id = c.class_id
+<span class="kw">JOIN</span> COURSES co   <span class="kw">ON</span> c.course_id = co.course_id
+<span class="kw">WHERE</span> e.enrollment_status = <span class="st">'Approved'</span>;</pre></div>
+
+                <div class="code-block"><pre><span class="cm">-- Get average grade per student per course</span>
+<span class="kw">SELECT</span> s.first_name, s.last_name,
+       co.course_name, <span class="fn">AVG</span>(g.score) <span class="kw">AS</span> avg_score
+<span class="kw">FROM</span> STUDENTS s
+<span class="kw">JOIN</span> ENROLLMENTS e  <span class="kw">ON</span> s.student_id = e.student_id
+<span class="kw">JOIN</span> CLASSES c      <span class="kw">ON</span> e.class_id = c.class_id
+<span class="kw">JOIN</span> COURSES co     <span class="kw">ON</span> c.course_id = co.course_id
+<span class="kw">JOIN</span> GRADES g       <span class="kw">ON</span> e.enrollment_id = g.enrollment_id
+<span class="kw">GROUP BY</span> s.student_id, co.course_id
+<span class="kw">ORDER BY</span> avg_score <span class="kw">DESC</span>;</pre></div>
+
+                <div class="code-block"><pre><span class="cm">-- Check unpaid fees per student</span>
+<span class="kw">SELECT</span> s.first_name, s.last_name,
+       f.fee_type, f.amount, f.due_date, f.status
+<span class="kw">FROM</span> STUDENTS s
+<span class="kw">JOIN</span> FINANCIAL_FEES f <span class="kw">ON</span> s.student_id = f.student_id
+<span class="kw">WHERE</span> f.status = <span class="st">'Unpaid'</span>
+<span class="kw">ORDER BY</span> f.due_date;</pre></div>
+
+                <h2>Security Design</h2>
+                <ul>
+                    <li><strong>Role-Based Access Control (RBAC)</strong> — 4 roles: Admin, Teacher, Student, Parent</li>
+                    <li><strong>Password Hashing</strong> — All passwords stored using bcrypt (never plaintext)</li>
+                    <li><strong>HTTPS Encryption</strong> — All data in transit encrypted</li>
+                    <li><strong>Sensitive Data Encryption</strong> — Medical records encrypted at rest</li>
+                    <li><strong>Audit Logging</strong> — All important actions tracked by admin</li>
+                    <li><strong>Daily Backup</strong> — Automated backups logged in BACKUP_RECORDS table</li>
+                </ul>
+
+                <h2>What I Learned</h2>
+                <p>
+                    This project was my deepest hands-on experience with relational database design. My specific
+                    role was designing the <strong>Entity Relationship Diagram (ERD)</strong> and reviewing the
+                    system processes — which required understanding every table relationship, cardinality, and
+                    data flow across all 15 tables. I learned how to translate business requirements into a
+                    normalized database schema, how to use composite primary keys correctly, how to enforce
+                    referential integrity through foreign keys, and how to design a system that serves multiple
+                    stakeholder groups with different access levels. Working in a team also taught me how to
+                    coordinate database design decisions across different parts of a system.
+                </p>
+
+                <div class="proj-bottom-nav">
+                    <a href="salary-analysis.html" class="proj-nav-link"><i class="fas fa-arrow-left"></i> Previous Project</a>
+                    <a href="../index.html#projects" class="proj-nav-link">All Projects <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="proj-sidebar">
+                <div class="proj-sidebar-card">
+                    <h3>Technologies Used</h3>
+                    <div class="tech-chips">
+                        <span class="tech-chip">MySQL</span>
+                        <span class="tech-chip">SQL</span>
+                        <span class="tech-chip">ERD Design</span>
+                        <span class="tech-chip">dbdiagram.io</span>
+                        <span class="tech-chip">3NF Normalization</span>
+                        <span class="tech-chip">RBAC</span>
+                        <span class="tech-chip">Foreign Keys</span>
+                    </div>
+                </div>
+
+                <div class="proj-sidebar-card">
+                    <h3>Key Highlights</h3>
+                    <ul class="highlight-list">
+                        <li><i class="fas fa-check-circle"></i> 15 fully normalized database tables</li>
+                        <li><i class="fas fa-check-circle"></i> Normalized to 3NF — no redundancy</li>
+                        <li><i class="fas fa-check-circle"></i> 8 stakeholder groups supported</li>
+                        <li><i class="fas fa-check-circle"></i> Role-based access control (4 roles)</li>
+                        <li><i class="fas fa-check-circle"></i> ERD designed with dbdiagram.io</li>
+                        <li><i class="fas fa-check-circle"></i> Full SQL DDL with foreign key constraints</li>
+                        <li><i class="fas fa-check-circle"></i> Automated backup & notification system</li>
+                    </ul>
+                </div>
+
+                <div class="proj-sidebar-card">
+                    <h3>My Role</h3>
+                    <p style="font-size:.85rem;color:var(--text-secondary);line-height:1.7;margin-bottom:8px;">
+                        <strong style="color:var(--accent-light)">ER Diagram Designer</strong><br>
+                        Designed the complete Entity Relationship Diagram for all 15 tables and reviewed the system process flow to ensure consistency between requirements and the database structure.
+                    </p>
+                </div>
+
+                <div class="proj-sidebar-card">
+                    <h3>Deliverables</h3>
+                    <a href="https://github.com/Vannara22" target="_blank" class="proj-link-btn"><i class="fab fa-github"></i> View on GitHub</a>
+                    <!-- Add your Canva/PowerPoint link below -->
+                    <!-- <a href="YOUR_CANVA_OR_GDRIVE_LINK" target="_blank" class="proj-link-btn"><i class="fas fa-file-powerpoint"></i> Presentation Slides</a> -->
+                    <!-- <a href="../reports/school-report.pdf" target="_blank" class="proj-link-btn"><i class="fas fa-file-pdf"></i> Full Report</a> -->
+                </div>
+
+                <div class="author-card">
+                    <div class="author-avatar">
+                        <img src="../image/my photo.jpg" alt="Vannara" onerror="this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>'">
+                    </div>
+                    <div class="author-name">Niem Vannara</div>
+                    <div class="author-role">Data Science & Engineering · RUPP Gen 4</div>
+                    <div class="author-links">
+                        <a href="https://github.com/Vannara22" target="_blank" class="author-link"><i class="fab fa-github"></i></a>
+                        <a href="../index.html#contact" class="author-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const t=document.getElementById('themeToggle'),i=document.getElementById('themeIcon'),h=document.documentElement,s=localStorage.getItem('theme')||'dark';
+    h.setAttribute('data-theme',s);i.className=s==='dark'?'fas fa-sun':'fas fa-moon';
+    t.addEventListener('click',()=>{const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);i.className=n==='dark'?'fas fa-sun':'fas fa-moon';});
+    // Close lightbox on click outside image
+    document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)this.classList.remove('active');});
+</script>
+</body>
+</html>
