@@ -690,77 +690,87 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Let's Connect</span>
-                <h2 class="section-title">Get In Touch</h2>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-left">
-                    <p class="contact-intro">
-                        I'm currently looking for internship opportunities in Data Engineering or Data Analysis.
-                        Whether you have an opportunity, a project idea, or just want to connect — my inbox is open!
-                    </p>
-                    <div class="contact-methods">
-                        <a href="mailto:your@email.com" class="contact-method">
-                            <div class="method-icon"><i class="fas fa-envelope"></i></div>
-                            <div>
-                                <span class="method-label">Email</span>
-                                <span class="method-value">your@email.com</span>
-                            </div>
-                        </a>
-                        <a href="#" class="contact-method">
-                            <div class="method-icon"><i class="fab fa-linkedin"></i></div>
-                            <div>
-                                <span class="method-label">LinkedIn</span>
-                                <span class="method-value">linkedin.com/in/niemvannara</span>
-                            </div>
-                        </a>
-                        <a href="#" class="contact-method">
-                            <div class="method-icon"><i class="fab fa-github"></i></div>
-                            <div>
-                                <span class="method-label">GitHub</span>
-                                <span class="method-value">github.com/niemvannara</span>
-                            </div>
-                        </a>
-                        <a href="#" class="contact-method">
-                            <div class="method-icon"><i class="fab fa-telegram"></i></div>
-                            <div>
-                                <span class="method-label">Telegram</span>
-                                <span class="method-value">@niemvannara</span>
-                            </div>
-                        </a>
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Let's Connect</span>
+            <h2 class="section-title">Get In Touch</h2>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-left">
+                <p class="contact-intro">
+                    I'm currently looking for internship opportunities in Data Engineering or Data Analysis.
+                    Whether you have an opportunity, a project idea, or just want to connect — my inbox is open!
+                </p>
+                <div class="contact-methods">
+                    <!-- Email: fixed mailto link -->
+                    <a href="mailto:vannaraniem2@email.com" class="contact-method">
+                        <div class="method-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <span class="method-label">Email</span>
+                            <span class="method-value">vannaraniem2@email.com</span>
+                        </div>
+                    </a>
+
+                    <!-- LinkedIn: removed outer link, now a div with inner link only -->
+                    <div class="contact-method">
+                        <div class="method-icon"><i class="fab fa-linkedin"></i></div>
+                        <div>
+                            <span class="method-label">LinkedIn</span>
+                            <span class="method-value">Niem Vannara</span>
+                            <a href="https://www.linkedin.com/in/vannara-niem-0b12533b2" target="_blank" rel="noopener noreferrer" class="proj-link-btn"></i> LinkedIn
+                                
+                            </a>
+                        </div>
                     </div>
+
+                    <!-- GitHub: fixed link -->
+                    <a href="https://github.com/Vannara22" target="_blank" rel="noopener noreferrer" class="contact-method">
+                        <div class="method-icon"><i class="fab fa-github"></i></div>
+                        <div>
+                            <span class="method-label">GitHub</span>
+                            <span class="method-value">vannara22</span>
+                        </div>
+                    </a>
+
+                    <!-- Telegram: fixed link (using t.me) -->
+                    <a href="https://t.me/Leng_E" target="_blank" rel="noopener noreferrer" class="contact-method">
+                        <div class="method-icon"><i class="fab fa-telegram"></i></div>
+                        <div>
+                            <span class="method-label">Telegram</span>
+                            <span class="method-value">Niem Vannara</span>
+                        </div>
+                    </a>
                 </div>
-                <div class="contact-right">
-                    <form id="contactForm" class="contact-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Your Name</label>
-                                <input type="text" name="name" placeholder="Kea Leanghong" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Your Email</label>
-                                <input type="email" name="email" placeholder="email@example.com" required>
-                            </div>
+            </div>
+            <div class="contact-right">
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" name="name" placeholder="Niem Vannara" required>
                         </div>
                         <div class="form-group">
-                            <label>Subject</label>
-                            <input type="text" name="subject" placeholder="Internship Opportunity" required>
+                            <label>Your Email</label>
+                            <input type="email" name="email" placeholder="email@example.com" required>
                         </div>
-                        <div class="form-group">
-                            <label>Message</label>
-                            <textarea name="message" placeholder="Tell me about the opportunity..." rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-full">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" name="subject" placeholder="Internship Opportunity" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" placeholder="Tell me about the opportunity..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -784,9 +794,9 @@
                 <div class="footer-social">
                     <h4>Connect</h4>
                     <div class="social-row">
-                        <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-btn"><i class="fab fa-telegram"></i></a>
+                        <a href="https://www.linkedin.com/in/vannara-niem-0b12533b2" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/Vannara22#" class="social-btn"><i class="fab fa-github"></i></a>
+                        <a href="https://t.me/Leng_E" class="social-btn"><i class="fab fa-telegram"></i></a>
                         <a href="#" class="social-btn"><i class="fab fa-facebook"></i></a>
                     </div>
                 </div>
