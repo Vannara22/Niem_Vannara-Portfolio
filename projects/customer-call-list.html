@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETL Customer Call List — Niem Vannara</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background: var(--bg-primary); }
+        .proj-page { padding: 100px 0 80px; min-height: 100vh; }
+
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--accent-light); text-decoration: none;
+            font-size: 0.88rem; font-weight: 600; margin-bottom: 32px;
+            transition: gap 0.3s;
+        }
+        .back-btn:hover { gap: 14px; }
+
+        /* Top label row */
+        .proj-label-row {
+            display: flex; align-items: center; gap: 12px;
+            flex-wrap: wrap; margin-bottom: 18px;
+        }
+        .proj-type-tag {
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; padding: 4px 12px; border-radius: 20px;
+            background: var(--accent-glow); color: var(--accent-light);
+        }
+        .proj-meta-inline {
+            font-size: 0.82rem; color: var(--text-muted);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .proj-meta-inline i { font-size: 0.75rem; }
+        .dot { color: var(--border); }
+
+        /* Title */
+        .proj-page h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800; color: var(--text-primary);
+            margin-bottom: 10px; line-height: 1.15;
+        }
+        .proj-org {
+            font-size: 1rem; color: var(--accent-light);
+            font-weight: 600; margin-bottom: 32px; display: block;
+        }
+
+        /* Image */
+        .proj-image {
+            width: 100%; border-radius: var(--radius);
+            border: 1px solid var(--border); margin-bottom: 40px;
+            background: var(--bg-card);
+            display: flex; align-items: center; justify-content: center;
+            min-height: 220px; overflow: hidden;
+        }
+        .proj-image img { width: 100%; border-radius: var(--radius); display: block; }
+        .proj-image-placeholder {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; gap: 12px; padding: 60px;
+            color: var(--text-muted);
+        }
+        .proj-image-placeholder i { font-size: 3rem; color: var(--accent-light); opacity: 0.4; }
+        .proj-image-placeholder p { font-size: 0.85rem; }
+
+        /* Two column layout */
+        .proj-layout {
+            display: grid; grid-template-columns: 1fr 320px;
+            gap: 40px; align-items: start;
+        }
+
+        /* Sidebar */
+        .proj-sidebar-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 22px; margin-bottom: 18px;
+        }
+        .proj-sidebar-card h3 {
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--text-muted); margin-bottom: 14px;
+        }
+        .tech-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+        .tech-chip {
+            background: var(--accent-glow); color: var(--accent-light);
+            padding: 4px 12px; border-radius: 20px;
+            font-size: 0.75rem; font-weight: 600;
+        }
+        .highlight-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+        .highlight-list li {
+            display: flex; align-items: flex-start; gap: 8px;
+            font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;
+        }
+        .highlight-list li i { color: var(--green); font-size: 0.75rem; margin-top: 4px; flex-shrink: 0; }
+
+        .proj-link-btn {
+            display: flex; align-items: center; gap: 10px;
+            padding: 11px 16px; border-radius: var(--radius-sm);
+            border: 1px solid var(--border); background: var(--bg-secondary);
+            color: var(--text-primary); text-decoration: none;
+            font-size: 0.88rem; font-weight: 600;
+            transition: all 0.3s; margin-bottom: 10px;
+        }
+        .proj-link-btn:hover { border-color: var(--accent); color: var(--accent-light); }
+        .proj-link-btn i { color: var(--accent-light); width: 18px; text-align: center; }
+
+        /* Author card */
+        .author-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 22px; text-align: center;
+        }
+        .author-avatar {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: var(--accent-glow); border: 2px solid var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 12px; font-size: 1.4rem; color: var(--accent-light);
+            overflow: hidden;
+        }
+        .author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .author-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 4px; }
+        .author-role { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px; }
+        .author-links { display: flex; justify-content: center; gap: 8px; }
+        .author-link {
+            width: 34px; height: 34px; border-radius: 50%;
+            border: 1px solid var(--border); background: var(--bg-secondary);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+        .author-link:hover { border-color: var(--accent); color: var(--accent-light); }
+
+        /* Content sections */
+        .proj-content h2 {
+            font-family: 'Syne', sans-serif; font-size: 1.3rem;
+            font-weight: 700; color: var(--text-primary);
+            margin: 36px 0 14px;
+        }
+        .proj-content h2:first-child { margin-top: 0; }
+        .proj-content p {
+            color: var(--text-secondary); line-height: 1.85;
+            margin-bottom: 14px; font-size: 0.93rem;
+        }
+        .proj-content ul { list-style: none; padding: 0; margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px; }
+        .proj-content ul li {
+            padding-left: 18px; position: relative;
+            color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;
+        }
+        .proj-content ul li::before { content: '▸'; position: absolute; left: 0; color: var(--accent-light); }
+
+        /* Steps table */
+        .steps-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88rem; }
+        .steps-table th {
+            text-align: left; padding: 10px 14px;
+            background: var(--bg-card); color: var(--text-muted);
+            font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px;
+            border-bottom: 2px solid var(--border);
+        }
+        .steps-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); vertical-align: top; }
+        .steps-table tr:hover td { background: var(--bg-card); }
+        .step-num { color: var(--accent-light); font-weight: 700; width: 40px; }
+
+        /* Nav bottom */
+        .proj-bottom-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 40px; margin-top: 40px;
+            border-top: 1px solid var(--border); flex-wrap: wrap; gap: 12px;
+        }
+        .proj-nav-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--accent-light); text-decoration: none;
+            font-size: 0.88rem; font-weight: 600;
+            padding: 10px 18px; border: 1px solid var(--border);
+            border-radius: var(--radius-sm); background: var(--bg-card);
+            transition: all 0.3s;
+        }
+        .proj-nav-link:hover { border-color: var(--accent); }
+
+        @media (max-width: 900px) {
+            .proj-layout { grid-template-columns: 1fr; }
+            .proj-sidebar { order: -1; }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <a href="../index.html" style="text-decoration:none;">
+                <span class="logo-text">AURA<span class="logo-accent">Jr</span></span>
+            </a>
+        </div>
+        <div class="nav-right">
+            <button class="theme-toggle" id="themeToggle"><i class="fas fa-sun" id="themeIcon"></i></button>
+        </div>
+    </div>
+</nav>
+
+<div class="proj-page">
+    <div class="container">
+        <a href="../index.html#projects" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Projects
+        </a>
+
+        <!-- Label row -->
+        <div class="proj-label-row">
+            <span class="proj-type-tag">ETL / Data Cleaning</span>
+            <span class="proj-meta-inline"><i class="far fa-calendar-alt"></i> 2024</span>
+            <span class="dot">·</span>
+            <span class="proj-meta-inline"><i class="fas fa-map-marker-alt"></i> Phnom Penh, Cambodia</span>
+        </div>
+
+        <h1>ETL — Customer Call List<br>Data Cleaning Pipeline</h1>
+        <span class="proj-org">Personal Data Engineering Project</span>
+
+        <!-- Image placeholder — replace src with your screenshot -->
+        <div class="proj-image">
+    <img src="etl customer image.png" alt="ETL Customer Call List Preview">
+</div>
+
+        <div class="proj-layout">
+            <!-- Main Content -->
+            <div class="proj-content">
+
+                <p>
+                    This project demonstrates a complete <strong>ETL (Extract, Transform, Load)</strong> data
+                    cleaning pipeline applied to a raw customer call list dataset. The goal is to transform
+                    messy, inconsistent raw data into a clean, structured dataset ready for CRM use or
+                    downstream analysis — solving the common real-world problem of dirty data.
+                </p>
+
+                <h2>Project Overview</h2>
+                <p>
+                    Real-world datasets are rarely clean. This project tackles the most common data quality
+                    issues found in customer datasets: inconsistent formatting, missing values, duplicate
+                    records, invalid characters, mixed data in single columns, and business logic filtering.
+                    Each issue was identified, analyzed, and resolved systematically using Python and Pandas.
+                </p>
+
+                <h2>Data Cleaning Steps</h2>
+                <table class="steps-table">
+                    <thead>
+                        <tr>
+                            <th>Step</th>
+                            <th>Action</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="step-num">01</td><td>Load & Inspect</td><td>Read CSV, check head/tail, shape, dtypes, describe()</td></tr>
+                        <tr><td class="step-num">02</td><td>Standardize Columns</td><td>Lowercase column names, replace spaces with underscores</td></tr>
+                        <tr><td class="step-num">03</td><td>Remove Duplicates</td><td>Drop all duplicate rows across the dataset</td></tr>
+                        <tr><td class="step-num">04</td><td>Missing Values</td><td>Count and identify null values per column</td></tr>
+                        <tr><td class="step-num">05</td><td>Clean Last Names</td><td>Strip special characters: periods, slashes, underscores, digits</td></tr>
+                        <tr><td class="step-num">06</td><td>Format Phone Numbers</td><td>Remove non-numeric chars, reformat to XXX-XXX-XXXX</td></tr>
+                        <tr><td class="step-num">07</td><td>Split Address</td><td>Split combined address into street, state, zip_code columns</td></tr>
+                        <tr><td class="step-num">08</td><td>Standardize Values</td><td>paying_customer & do_not_contact: Yes→Y, No→N</td></tr>
+                        <tr><td class="step-num">09</td><td>Business Filter</td><td>Remove all rows where do_not_contact = Y</td></tr>
+                        <tr><td class="step-num">10</td><td>Drop Invalid Phones</td><td>Remove rows with missing or blank phone numbers</td></tr>
+                        <tr><td class="step-num">11</td><td>Reset Index</td><td>Re-index after filtering to maintain clean row numbering</td></tr>
+                        <tr><td class="step-num">12</td><td>Export Clean Data</td><td>Save final cleaned dataset to customer_call_list_cleaned.csv</td></tr>
+                    </tbody>
+                </table>
+
+                <h2>Key Challenges Solved</h2>
+                <ul>
+                    <li>Phone numbers had mixed formats — some with dashes, symbols, or letters — all standardized to XXX-XXX-XXXX</li>
+                    <li>Last names contained trailing special characters like <code>...</code>, <code>/</code>, <code>_</code> from data entry errors</li>
+                    <li>Address was stored as a single string — split into 3 separate usable columns</li>
+                    <li>Do-not-contact list filtering applied as a business rule to protect customer preferences</li>
+                    <li>Mixed representations of Yes/No values standardized across multiple columns</li>
+                </ul>
+
+                <h2>Results & Output</h2>
+                <ul>
+                    <li>✅ All duplicate records removed</li>
+                    <li>✅ Phone numbers consistently formatted as XXX-XXX-XXXX</li>
+                    <li>✅ Address field split into street, state, and zip_code</li>
+                    <li>✅ Opted-out customers (do_not_contact = Y) fully filtered</li>
+                    <li>✅ Rows with invalid/missing phone numbers removed</li>
+                    <li>✅ Clean production-ready CSV exported successfully</li>
+                </ul>
+
+                <h2>What I Learned</h2>
+                <p>
+                    This project taught me how to design a systematic data cleaning pipeline that mirrors
+                    real ETL workflows used in industry. I learned how to use Pandas string methods and
+                    regex for messy text data, apply business logic rules as data filters, restructure
+                    columns for better usability, and export clean data for downstream processing.
+                    Most importantly, I learned that data cleaning is not just technical — it requires
+                    understanding the business context behind each data field.
+                </p>
+
+                <div class="proj-bottom-nav">
+                    <a href="../index.html#projects" class="proj-nav-link">
+                        <i class="fas fa-arrow-left"></i> All Projects
+                    </a>
+                    <a href="customer-shopping.html" class="proj-nav-link">
+                        Next Project <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="proj-sidebar">
+                <div class="proj-sidebar-card">
+                    <h3>Technologies Used</h3>
+                    <div class="tech-chips">
+                        <span class="tech-chip">Python 3</span>
+                        <span class="tech-chip">Pandas</span>
+                        <span class="tech-chip">NumPy</span>
+                        <span class="tech-chip">Regex</span>
+                        <span class="tech-chip">Jupyter Notebook</span>
+                        <span class="tech-chip">CSV</span>
+                    </div>
+                </div>
+
+                <div class="proj-sidebar-card">
+                    <h3>Key Highlights</h3>
+                    <ul class="highlight-list">
+                        <li><i class="fas fa-check-circle"></i> 12-step systematic ETL cleaning pipeline</li>
+                        <li><i class="fas fa-check-circle"></i> Phone numbers reformatted to XXX-XXX-XXXX</li>
+                        <li><i class="fas fa-check-circle"></i> Address column split into 3 structured fields</li>
+                        <li><i class="fas fa-check-circle"></i> Business rule: opted-out customers filtered</li>
+                        <li><i class="fas fa-check-circle"></i> Clean CSV exported for downstream use</li>
+                    </ul>
+                </div>
+
+                <div class="proj-sidebar-card">
+                    <h3>Links</h3>
+                    <a href="https://github.com/Vannara22" target="_blank" class="proj-link-btn">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                </div>
+
+                <div class="author-card">
+                    <div class="author-avatar">
+                        <img src="../image/my photo.jpg" alt="Vannara" onerror="this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>'">
+                    </div>
+                    <div class="author-name">Niem Vannara</div>
+                    <div class="author-role">Data Science & Engineering · RUPP Gen 4</div>
+                    <div class="author-links">
+                        <a href="https://github.com/Vannara22" target="_blank" class="author-link"><i class="fab fa-github"></i></a>
+                        <a href="../index.html#contact" class="author-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const t = document.getElementById('themeToggle');
+    const i = document.getElementById('themeIcon');
+    const h = document.documentElement;
+    const s = localStorage.getItem('theme') || 'dark';
+    h.setAttribute('data-theme', s);
+    i.className = s === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    t.addEventListener('click', () => {
+        const n = h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        h.setAttribute('data-theme', n);
+        localStorage.setItem('theme', n);
+        i.className = n === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Face Skin Analysis — Niem Vannara</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .project-page { padding: 100px 0 80px; min-height: 100vh; }
+
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--accent-light); text-decoration: none;
+            font-size: 0.9rem; font-weight: 600; margin-bottom: 40px;
+            transition: gap 0.3s ease;
+        }
+        .back-btn:hover { gap: 14px; }
+
+        /* Hero */
+        .proj-hero { margin-bottom: 48px; }
+        .proj-tag {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; color: #fbbf24;
+            background: rgba(251,191,36,0.12); padding: 4px 14px;
+            border-radius: 20px; margin-bottom: 16px;
+            border: 1px solid rgba(251,191,36,0.25);
+        }
+        .proj-hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800; color: var(--text-primary); margin-bottom: 16px;
+        }
+        .proj-hero p {
+            font-size: 1.1rem; color: var(--text-secondary);
+            max-width: 700px; line-height: 1.8;
+        }
+
+        /* Meta bar */
+        .proj-meta {
+            display: flex; flex-wrap: wrap; gap: 0;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); overflow: hidden; margin: 32px 0;
+        }
+        .meta-item {
+            flex: 1; min-width: 140px;
+            padding: 18px 24px;
+            border-right: 1px solid var(--border);
+        }
+        .meta-item:last-child { border-right: none; }
+        .meta-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); display: block; margin-bottom: 4px; }
+        .meta-value { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); display: block; }
+
+        /* Video section */
+        .video-section { margin-bottom: 56px; }
+        .video-section h2 {
+            font-family: 'Syne', sans-serif; font-size: 1.4rem;
+            font-weight: 700; color: var(--text-primary); margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .video-section h2 i { color: var(--accent-light); }
+
+        .video-wrapper {
+            position: relative; width: 100%;
+            padding-bottom: 56.25%; /* 16:9 */
+            border-radius: var(--radius); overflow: hidden;
+            background: var(--bg-card); border: 1px solid var(--border);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .video-wrapper iframe,
+        .video-wrapper video {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; border: none;
+        }
+
+        /* Local video fallback */
+        .video-local {
+            width: 100%; border-radius: var(--radius); overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .video-local video { width: 100%; display: block; border-radius: var(--radius); }
+
+        /* Body layout */
+        .proj-body {
+            display: grid; grid-template-columns: 2fr 1fr;
+            gap: 40px; align-items: start;
+        }
+
+        /* Content sections */
+        .content-sec { margin-bottom: 40px; }
+        .content-sec h2 {
+            font-family: 'Syne', sans-serif; font-size: 1.2rem;
+            font-weight: 700; color: var(--text-primary);
+            padding-bottom: 10px; border-bottom: 2px solid var(--border);
+            margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+        }
+        .content-sec h2 i { color: var(--accent-light); font-size: 1rem; }
+        .content-sec p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 12px; font-size: 0.93rem; }
+        .content-sec ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+        .content-sec ul li {
+            padding-left: 18px; position: relative;
+            color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7;
+        }
+        .content-sec ul li::before { content: '▸'; position: absolute; left: 0; color: var(--accent-light); }
+
+        /* Feature cards */
+        .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+        .feature-card {
+            background: var(--bg-secondary); border: 1px solid var(--border);
+            border-radius: var(--radius-sm); padding: 16px;
+            transition: border-color 0.3s ease;
+        }
+        .feature-card:hover { border-color: var(--accent); }
+        .feature-card i { font-size: 1.2rem; color: var(--accent-light); margin-bottom: 8px; display: block; }
+        .feature-card h4 { font-size: 0.85rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+        .feature-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+        /* Business model */
+        .biz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .biz-card {
+            background: var(--bg-secondary); border: 1px solid var(--border);
+            border-radius: var(--radius-sm); padding: 16px;
+        }
+        .biz-card h4 { font-size: 0.82rem; font-weight: 700; color: var(--accent-light); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .biz-card ul { margin: 0; }
+
+        /* Sidebar */
+        .sidebar-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 22px; margin-bottom: 18px;
+        }
+        .sidebar-card h3 {
+            font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--text-muted); margin-bottom: 14px;
+        }
+        .tech-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+        .sidebar-links { display: flex; flex-direction: column; gap: 10px; }
+        .sidebar-link {
+            display: flex; align-items: center; gap: 10px;
+            padding: 11px 14px; border-radius: var(--radius-sm);
+            border: 1px solid var(--border); background: var(--bg-secondary);
+            color: var(--text-primary); text-decoration: none;
+            font-size: 0.88rem; font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .sidebar-link:hover { border-color: var(--accent); color: var(--accent-light); }
+        .sidebar-link i { color: var(--accent-light); width: 16px; text-align: center; }
+
+        .award-card {
+            background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(251,191,36,0.05));
+            border: 1px solid rgba(251,191,36,0.3);
+            border-radius: var(--radius); padding: 20px; text-align: center;
+            margin-bottom: 18px;
+        }
+        .award-card i { font-size: 2rem; color: #fbbf24; margin-bottom: 8px; display: block; }
+        .award-card h4 { font-size: 0.88rem; font-weight: 700; color: #fbbf24; margin-bottom: 6px; }
+        .award-card p { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+
+        @media (max-width: 768px) {
+            .proj-body { grid-template-columns: 1fr; }
+            .proj-meta { flex-direction: column; }
+            .meta-item { border-right: none; border-bottom: 1px solid var(--border); }
+            .feature-grid { grid-template-columns: 1fr; }
+            .biz-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration:none;">
+                    <span class="logo-text">AURA<span class="logo-accent">Jr</span></span>
+                </a>
+            </div>
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-sun" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="project-page">
+        <div class="container">
+
+            <a href="../index.html#projects" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
+
+            <!-- Hero -->
+            <div class="proj-hero">
+                <div class="proj-tag">
+                    <i class="fas fa-trophy"></i> Huawei ICT Competition Cambodia 2024–2025
+                </div>
+                <h1>AI Face Skin Condition Analysis<br>&amp; Skincare Recommendation</h1>
+                <p>
+                    An AI-powered web platform that analyzes facial skin conditions through photo or webcam input
+                    and provides personalized skincare product recommendations. Built as part of the
+                    <strong>Huawei ICT Competition — AI Innovation Track, Cambodia National Final 2024–2025</strong>.
+                </p>
+            </div>
+
+            <!-- Meta -->
+            <div class="proj-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Timeline</span>
+                    <span class="meta-value">2024 — 2025</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">Team Member</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Category</span>
+                    <span class="meta-value">AI / ML / Web</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Competition</span>
+                    <span class="meta-value">Huawei ICT 2024–2025</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Status</span>
+                    <span class="meta-value">✅ Completed</span>
+                </div>
+            </div>
+
+            <!-- VIDEO SECTION -->
+            <div class="video-section">
+                <h2><i class="fas fa-play-circle"></i> Project Demo Video</h2>
+                
+                <div class="video-local">
+                    <video controls poster="../image/demo_pic.png">
+                    <source src="skincare-demo.mp4" type="video/mp4">
+                        Your browser does not support video playback.
+                    </video>
+                </div>
+
+            </div>
+
+            <!-- Body -->
+            <div class="proj-body">
+                <div class="proj-content">
+
+                    <div class="content-sec">
+                        <h2><i class="fas fa-info-circle"></i> Overview</h2>
+                        <p>
+                            BeauTech is an AI-powered skincare analysis platform developed for the
+                            Huawei ICT Competition. Users can upload a photo or use their webcam to
+                            have their facial skin analyzed in real time. The system identifies skin
+                            conditions and recommends personalized skincare products matched to the
+                            user's skin type and concerns.
+                        </p>
+                        <p>
+                            The platform combines computer vision, deep learning, and a recommendation
+                            engine to deliver a seamless skincare journey — from analysis to
+                            product discovery — all in one web application.
+                        </p>
+                    </div>
+
+                    <div class="content-sec">
+                        <h2><i class="fas fa-star"></i> Key Features</h2>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-camera"></i>
+                                <h4>Face Skin Analysis</h4>
+                                <p>Real-time skin condition detection via photo upload or live webcam</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-magic"></i>
+                                <h4>AI Recommendations</h4>
+                                <p>Personalized skincare products matched to your detected skin type</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Progress Dashboard</h4>
+                                <p>Track your skin health progress over time with visual analytics</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-mobile-alt"></i>
+                                <h4>Responsive Web App</h4>
+                                <p>Fully responsive design accessible on desktop and mobile devices</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-sec">
+                        <h2><i class="fas fa-sitemap"></i> Business Model</h2>
+                        <div class="biz-grid">
+                            <div class="biz-card">
+                                <h4>🆓 Freemium</h4>
+                                <ul class="timeline-list">
+                                    <li>Basic skin condition analysis</li>
+                                    <li>General product recommendations</li>
+                                    <li>Free to all users</li>
+                                </ul>
+                            </div>
+                            <div class="biz-card">
+                                <h4>💎 Premium</h4>
+                                <ul class="timeline-list">
+                                    <li>Advanced skin analysis reports</li>
+                                    <li>Personalized skincare routines</li>
+                                    <li>Progress tracking dashboard</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-sec">
+                        <h2><i class="fas fa-cogs"></i> Technical Implementation</h2>
+                        <ul>
+                            <li>Computer vision model trained to detect skin conditions (acne, dryness, oiliness, sensitivity)</li>
+                            <li>Deep learning pipeline for facial feature extraction and skin type classification</li>
+                            <li>Recommendation engine that maps detected conditions to curated product database</li>
+                            <li>Web frontend with webcam integration for real-time analysis</li>
+                            <li>Backend API connecting the ML model to the web interface</li>
+                            <li>Product database with match scoring (e.g., 67% match for CeraVe Hydrating Cleanser)</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-sec">
+                        <h2><i class="fas fa-graduation-cap"></i> What I Learned</h2>
+                        <ul>
+                            <li>Applying computer vision to real-world skincare problems</li>
+                            <li>Building and integrating ML models into a web application</li>
+                            <li>Designing a recommendation engine with match scoring</li>
+                            <li>Working in a team under competition pressure and deadlines</li>
+                            <li>Presenting a technical AI product to competition judges professionally</li>
+                            <li>Business model thinking: freemium vs premium product design</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar -->
+                <div class="proj-sidebar">
+
+                    <div class="award-card">
+                        <i class="fas fa-trophy"></i>
+                        <h4>Huawei ICT Competition</h4>
+                        <p>Selected for the National Final Cambodia 2024–2025 — AI Innovation Track</p>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3>Technologies</h3>
+                        <div class="tech-wrap">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">Deep Learning</span>
+                            <span class="tech-tag">Web Development</span>
+                            <span class="tech-tag">AI</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-links">
+                                        <a href="https://github.com/Vannara22/Website-AI-Face-Skin-Condition-Analysis-and-Skincare-Recommendation" target="_blank" class="sidebar-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
+                        <a href="https://canva.link/g4k1sfm9cupk4ss" target="_blank" class="sidebar-link">
+                            <i class="fas fa-presentation-screen"></i> View Presentation
+                        </a>
+                    </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3>Team</h3>
+                        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:4px;font-weight:600;">Niem Vannara</p>
+                        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px;">Data Science & Engineering · RUPP Gen 4</p>
+                        <p style="font-size:0.78rem;color:var(--text-muted);">Developed as part of RUPP team for Huawei ICT Competition Cambodia 2024–2025.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon   = document.getElementById('themeIcon');
+        const html        = document.documentElement;
+        const saved       = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', saved);
+        themeIcon.className = saved === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        themeToggle.addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            themeIcon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        });
+    </script>
+</body>
+</html>

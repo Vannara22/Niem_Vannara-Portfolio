@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Shopping Analysis — Niem Vannara</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background: var(--bg-primary); }
+        .proj-page { padding: 100px 0 80px; min-height: 100vh; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--accent-light); text-decoration: none; font-size: 0.88rem; font-weight: 600; margin-bottom: 32px; transition: gap 0.3s; }
+        .back-btn:hover { gap: 14px; }
+        .proj-label-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+        .proj-type-tag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 4px 12px; border-radius: 20px; background: var(--accent-glow); color: var(--accent-light); }
+        .proj-meta-inline { font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+        .proj-meta-inline i { font-size: 0.75rem; }
+        .dot { color: var(--border); }
+        .proj-page h1 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--text-primary); margin-bottom: 10px; line-height: 1.15; }
+        .proj-org { font-size: 1rem; color: var(--accent-light); font-weight: 600; margin-bottom: 32px; display: block; }
+        .proj-image { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 40px; background: var(--bg-card); display: flex; align-items: center; justify-content: center; min-height: 220px; overflow: hidden; }
+        .proj-image img { width: 100%; border-radius: var(--radius); display: block; }
+        .proj-image-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 60px; color: var(--text-muted); }
+        .proj-image-placeholder i { font-size: 3rem; color: var(--accent-light); opacity: 0.4; }
+        .proj-image-placeholder p { font-size: 0.85rem; text-align: center; }
+        .proj-layout { display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: start; }
+        .proj-sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; margin-bottom: 18px; }
+        .proj-sidebar-card h3 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 14px; }
+        .tech-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+        .tech-chip { background: var(--accent-glow); color: var(--accent-light); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .highlight-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+        .highlight-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+        .highlight-list li i { color: var(--green); font-size: 0.75rem; margin-top: 4px; flex-shrink: 0; }
+        .proj-link-btn { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); text-decoration: none; font-size: 0.88rem; font-weight: 600; transition: all 0.3s; margin-bottom: 10px; }
+        .proj-link-btn:hover { border-color: var(--accent); color: var(--accent-light); }
+        .proj-link-btn i { color: var(--accent-light); width: 18px; text-align: center; }
+        .author-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; text-align: center; }
+        .author-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--accent-glow); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 1.4rem; color: var(--accent-light); overflow: hidden; }
+        .author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .author-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 4px; }
+        .author-role { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px; }
+        .author-links { display: flex; justify-content: center; gap: 8px; }
+        .author-link { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: all 0.3s; }
+        .author-link:hover { border-color: var(--accent); color: var(--accent-light); }
+        .proj-content h2 { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin: 36px 0 14px; }
+        .proj-content h2:first-child { margin-top: 0; }
+        .proj-content p { color: var(--text-secondary); line-height: 1.85; margin-bottom: 14px; font-size: 0.93rem; }
+        .proj-content ul { list-style: none; padding: 0; margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px; }
+        .proj-content ul li { padding-left: 18px; position: relative; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+        .proj-content ul li::before { content: '▸'; position: absolute; left: 0; color: var(--accent-light); }
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+        .stat-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; text-align: center; }
+        .stat-box .num { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--accent-light); display: block; }
+        .stat-box .lbl { font-size: 0.75rem; color: var(--text-muted); }
+        .hypothesis-box { background: var(--bg-card); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 18px 20px; margin: 16px 0; }
+        .hypothesis-box h4 { font-size: 0.85rem; font-weight: 700; color: var(--accent-light); margin-bottom: 6px; }
+        .hypothesis-box p { font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+        .proj-bottom-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 40px; margin-top: 40px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 12px; }
+        .proj-nav-link { display: inline-flex; align-items: center; gap: 8px; color: var(--accent-light); text-decoration: none; font-size: 0.88rem; font-weight: 600; padding: 10px 18px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-card); transition: all 0.3s; }
+        .proj-nav-link:hover { border-color: var(--accent); }
+        @media (max-width: 900px) { .proj-layout { grid-template-columns: 1fr; } .stat-grid { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo"><a href="../index.html" style="text-decoration:none;"><span class="logo-text">AURA<span class="logo-accent">Jr</span></span></a></div>
+        <div class="nav-right"><button class="theme-toggle" id="themeToggle"><i class="fas fa-sun" id="themeIcon"></i></button></div>
+    </div>
+</nav>
+
+<div class="proj-page">
+    <div class="container">
+        <a href="../index.html#projects" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+
+        <div class="proj-label-row">
+            <span class="proj-type-tag">Data Analysis · Statistics</span>
+            <span class="proj-meta-inline"><i class="far fa-calendar-alt"></i> 2024</span>
+            <span class="dot">·</span>
+            <span class="proj-meta-inline"><i class="fas fa-map-marker-alt"></i> Phnom Penh, Cambodia</span>
+        </div>
+
+        <h1>Customer Shopping —<br>Statistical & Probability Analysis</h1>
+        <span class="proj-org">Personal Data Analysis Project</span>
+
+        <div class="proj-image">
+    <img src="customer shopping list image.png" alt="HR Attrition Analysis Preview">
+</div>
+
+        <div class="proj-layout">
+            <div class="proj-content">
+
+                <p>
+                    This project applies <strong>descriptive statistics, probability analysis, data visualization,
+                    and hypothesis testing</strong> to a real customer shopping dataset. Going beyond simple
+                    data cleaning, the project uses mathematical and statistical tools to extract meaningful
+                    insights about customer purchasing behavior and validate them with formal statistical tests.
+                </p>
+
+                <h2>Project Overview</h2>
+                <p>
+                    Using a customer shopping dataset, this project walks through the complete data analysis
+                    pipeline — from raw data inspection and cleaning, through statistical exploration, to
+                    probability calculations and hypothesis testing. The goal is to answer real business
+                    questions about customer behavior using data-driven methods.
+                </p>
+
+                <div class="stat-grid">
+                    <div class="stat-box"><span class="num">2</span><span class="lbl">Notebooks</span></div>
+                    <div class="stat-box"><span class="num">5</span><span class="lbl">Analysis Stages</span></div>
+                    <div class="stat-box"><span class="num">1</span><span class="lbl">Hypothesis Test</span></div>
+                </div>
+
+                <h2>Data Cleaning & Validation</h2>
+                <p>
+                    Before any analysis, the dataset was validated and cleaned to ensure data integrity.
+                    This included checking for missing values, removing duplicate records, and verifying
+                    that all numeric columns contained valid ranges with no negative values or impossible outliers.
+                </p>
+                <ul>
+                    <li>Loaded dataset and inspected structure using <code>.info()</code>, <code>.shape()</code>, <code>.describe()</code></li>
+                    <li>Checked all columns for null values using <code>.isnull().sum()</code></li>
+                    <li>Removed duplicate records with <code>.drop_duplicates()</code></li>
+                    <li>Verified data integrity — no missing values found after cleaning</li>
+                </ul>
+
+                <h2>Descriptive Statistics</h2>
+                <p>
+                    Applied comprehensive descriptive statistics to understand the central tendency and
+                    spread of key numerical features: <strong>price</strong> and <strong>quantity</strong>.
+                </p>
+                <ul>
+                    <li><strong>Mean</strong> — calculated average price and quantity per transaction</li>
+                    <li><strong>Median</strong> — identified the midpoint of price distribution</li>
+                    <li><strong>Variance & Standard Deviation</strong> — measured data spread and consistency</li>
+                    <li>Used both Pandas <code>.describe()</code> and manual NumPy calculations for cross-verification</li>
+                </ul>
+
+                <h2>Data Visualization</h2>
+                <p>
+                    Created multiple visualizations to communicate statistical findings clearly and identify
+                    patterns in the data that numbers alone might not reveal.
+                </p>
+                <ul>
+                    <li><strong>Price Distribution Histogram</strong> — revealed the shape and spread of product pricing</li>
+                    <li><strong>Quantity Distribution Histogram</strong> — showed purchasing quantity patterns</li>
+                    <li><strong>Price Boxplot</strong> — identified outliers in the pricing data</li>
+                </ul>
+
+                <h2>Probability Analysis</h2>
+                <p>
+                    Applied real probability concepts to derive insights from the data beyond simple averages.
+                    Calculated the empirical probability of specific events occurring in the dataset:
+                </p>
+                <ul>
+                    <li>Calculated <strong>P(quantity &gt; 5)</strong> — probability that a customer buys more than 5 items per transaction</li>
+                    <li>Used proportion-based probability: <code>P(event) = count(event) / total records</code></li>
+                    <li>Applied probability findings to understand high-volume purchasing behavior</li>
+                </ul>
+
+                <h2>Hypothesis Testing</h2>
+                <p>
+                    Applied formal statistical hypothesis testing using a one-sample t-test to validate
+                    a claim about the average price in the dataset:
+                </p>
+
+                <div class="hypothesis-box">
+                    <h4>H₀ (Null Hypothesis)</h4>
+                    <p>The true mean price of products = $50</p>
+                </div>
+                <div class="hypothesis-box">
+                    <h4>H₁ (Alternative Hypothesis)</h4>
+                    <p>The true mean price of products ≠ $50</p>
+                </div>
+                <div class="hypothesis-box">
+                    <h4>Result: Rejected Null Hypothesis ✅</h4>
+                    <p>With significance level α = 0.05, the p-value fell below the threshold — confirming that the true mean price is statistically significantly different from $50.</p>
+                </div>
+
+                <h2>Key Findings</h2>
+                <ul>
+                    <li>Price distribution shows a roughly normal shape with some high-value outliers</li>
+                    <li>Most transactions involve low-to-medium quantities — high-volume purchases are rare</li>
+                    <li>Boxplot reveals clear pricing outliers that skew the simple average upward</li>
+                    <li>Hypothesis test confirms the average price differs significantly from $50 (α = 0.05)</li>
+                    <li>Probability analysis provides quantitative insight into customer purchase volume behavior</li>
+                </ul>
+
+                <h2>What I Learned</h2>
+                <p>
+                    This project deepened my understanding of applied statistics in data analysis.
+                    I learned how to move beyond basic EDA and apply real statistical methods —
+                    computing variance and standard deviation manually, deriving empirical probabilities
+                    from data, and conducting formal hypothesis tests. Most importantly, I learned how
+                    to interpret statistical results and translate them into actionable business insights.
+                </p>
+
+                <div class="proj-bottom-nav">
+                    <a href="customer-call-list.html" class="proj-nav-link"><i class="fas fa-arrow-left"></i> Previous Project</a>
+                    <a href="hr-attrition.html" class="proj-nav-link">Next Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="proj-sidebar">
+                <div class="proj-sidebar-card">
+                    <h3>Technologies Used</h3>
+                    <div class="tech-chips">
+                        <span class="tech-chip">Python 3</span>
+                        <span class="tech-chip">Pandas</span>
+                        <span class="tech-chip">NumPy</span>
+                        <span class="tech-chip">Matplotlib</span>
+                        <span class="tech-chip">SciPy</span>
+                        <span class="tech-chip">Jupyter Notebook</span>
+                    </div>
+                </div>
+                <div class="proj-sidebar-card">
+                    <h3>Key Highlights</h3>
+                    <ul class="highlight-list">
+                        <li><i class="fas fa-check-circle"></i> Descriptive statistics: mean, median, variance, std</li>
+                        <li><i class="fas fa-check-circle"></i> Empirical probability analysis on purchase quantity</li>
+                        <li><i class="fas fa-check-circle"></i> Price & quantity distribution visualizations</li>
+                        <li><i class="fas fa-check-circle"></i> Outlier detection using boxplots</li>
+                        <li><i class="fas fa-check-circle"></i> One-sample t-test hypothesis testing (SciPy)</li>
+                        <li><i class="fas fa-check-circle"></i> Null hypothesis rejected at α = 0.05</li>
+                    </ul>
+                </div>
+                <div class="proj-sidebar-card">
+                    <h3>Links</h3>
+                    <a href="https://github.com/Vannara22" target="_blank" class="proj-link-btn"><i class="fab fa-github"></i> View on GitHub</a>
+                </div>
+                <div class="author-card">
+                    <div class="author-avatar"><img src="../image/my photo.jpg" alt="Vannara" onerror="this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>'"></div>
+                    <div class="author-name">Niem Vannara</div>
+                    <div class="author-role">Data Science & Engineering · RUPP Gen 4</div>
+                    <div class="author-links">
+                        <a href="https://github.com/Vannara22" target="_blank" class="author-link"><i class="fab fa-github"></i></a>
+                        <a href="../index.html#contact" class="author-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const t=document.getElementById('themeToggle'),i=document.getElementById('themeIcon'),h=document.documentElement,s=localStorage.getItem('theme')||'dark';
+    h.setAttribute('data-theme',s);i.className=s==='dark'?'fas fa-sun':'fas fa-moon';
+    t.addEventListener('click',()=>{const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);i.className=n==='dark'?'fas fa-sun':'fas fa-moon';});
+</script>
+</body>
+</html>

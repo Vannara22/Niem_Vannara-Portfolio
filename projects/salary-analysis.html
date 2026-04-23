@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Data Analysis — Niem Vannara</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body{background:var(--bg-primary)}.proj-page{padding:100px 0 80px;min-height:100vh}.back-btn{display:inline-flex;align-items:center;gap:8px;color:var(--accent-light);text-decoration:none;font-size:.88rem;font-weight:600;margin-bottom:32px;transition:gap .3s}.back-btn:hover{gap:14px}.proj-label-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}.proj-type-tag{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:4px 12px;border-radius:20px;background:var(--accent-glow);color:var(--accent-light)}.proj-meta-inline{font-size:.82rem;color:var(--text-muted);display:flex;align-items:center;gap:6px}.proj-meta-inline i{font-size:.75rem}.dot{color:var(--border)}.proj-page h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--text-primary);margin-bottom:10px;line-height:1.15}.proj-org{font-size:1rem;color:var(--accent-light);font-weight:600;margin-bottom:32px;display:block}.proj-image{width:100%;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:40px;background:var(--bg-card);display:flex;align-items:center;justify-content:center;min-height:220px;overflow:hidden}.proj-image img{width:100%;border-radius:var(--radius);display:block}.proj-image-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:60px;color:var(--text-muted)}.proj-image-placeholder i{font-size:3rem;color:var(--accent-light);opacity:.4}.proj-image-placeholder p{font-size:.85rem;text-align:center}.proj-layout{display:grid;grid-template-columns:1fr 320px;gap:40px;align-items:start}.proj-sidebar-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:18px}.proj-sidebar-card h3{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:14px}.tech-chips{display:flex;flex-wrap:wrap;gap:7px}.tech-chip{background:var(--accent-glow);color:var(--accent-light);padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600}.highlight-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px}.highlight-list li{display:flex;align-items:flex-start;gap:8px;font-size:.85rem;color:var(--text-secondary);line-height:1.6}.highlight-list li i{color:var(--green);font-size:.75rem;margin-top:4px;flex-shrink:0}.proj-link-btn{display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-secondary);color:var(--text-primary);text-decoration:none;font-size:.88rem;font-weight:600;transition:all .3s;margin-bottom:10px}.proj-link-btn:hover{border-color:var(--accent);color:var(--accent-light)}.proj-link-btn i{color:var(--accent-light);width:18px;text-align:center}.author-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;text-align:center}.author-avatar{width:56px;height:56px;border-radius:50%;background:var(--accent-glow);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;overflow:hidden}.author-avatar img{width:100%;height:100%;object-fit:cover}.author-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;color:var(--text-primary);margin-bottom:4px}.author-role{font-size:.78rem;color:var(--text-muted);margin-bottom:14px}.author-links{display:flex;justify-content:center;gap:8px}.author-link{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;font-size:.85rem;transition:all .3s}.author-link:hover{border-color:var(--accent);color:var(--accent-light)}.proj-content h2{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:var(--text-primary);margin:36px 0 14px}.proj-content h2:first-child{margin-top:0}.proj-content p{color:var(--text-secondary);line-height:1.85;margin-bottom:14px;font-size:.93rem}.proj-content ul{list-style:none;padding:0;margin-bottom:16px;display:flex;flex-direction:column;gap:8px}.proj-content ul li{padding-left:18px;position:relative;color:var(--text-secondary);font-size:.9rem;line-height:1.7}.proj-content ul li::before{content:'▸';position:absolute;left:0;color:var(--accent-light)}
+        .dataset-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+        .ds-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;text-align:center}
+        .ds-box .num{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--accent-light);display:block}
+        .ds-box .lbl{font-size:.72rem;color:var(--text-muted)}
+        .questions-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+        .q-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px}
+        .q-card h4{font-size:.8rem;font-weight:700;color:var(--accent-light);margin-bottom:4px}
+        .q-card p{font-size:.78rem;color:var(--text-muted);margin:0;line-height:1.5}
+        .dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+        .dash-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;text-align:center}
+        .dash-panel i{font-size:1.5rem;color:var(--accent-light);margin-bottom:8px;display:block}
+        .dash-panel h4{font-size:.82rem;font-weight:700;color:var(--text-primary);margin-bottom:4px}
+        .dash-panel p{font-size:.75rem;color:var(--text-muted);margin:0}
+        .finding-card{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(6,182,212,.04));border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;margin:10px 0}
+        .finding-card h4{font-size:.82rem;font-weight:700;color:var(--accent-light);margin-bottom:5px}
+        .finding-card p{font-size:.84rem;color:var(--text-secondary);margin:0;line-height:1.6}
+        .proj-bottom-nav{display:flex;justify-content:space-between;align-items:center;padding-top:40px;margin-top:40px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
+        .proj-nav-link{display:inline-flex;align-items:center;gap:8px;color:var(--accent-light);text-decoration:none;font-size:.88rem;font-weight:600;padding:10px 18px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-card);transition:all .3s}
+        .proj-nav-link:hover{border-color:var(--accent)}
+        @media(max-width:900px){.proj-layout{grid-template-columns:1fr}.dataset-stat-grid{grid-template-columns:1fr 1fr}.questions-grid,.dashboard-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo"><a href="../index.html" style="text-decoration:none;"><span class="logo-text">AURA<span class="logo-accent">Jr</span></span></a></div>
+        <div class="nav-right"><button class="theme-toggle" id="themeToggle"><i class="fas fa-sun" id="themeIcon"></i></button></div>
+    </div>
+</nav>
+
+<div class="proj-page">
+    <div class="container">
+        <a href="../index.html#projects" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+
+        <div class="proj-label-row">
+            <span class="proj-type-tag">EDA · Data Analysis</span>
+            <span class="proj-meta-inline"><i class="far fa-calendar-alt"></i> 2024</span>
+            <span class="dot">·</span>
+            <span class="proj-meta-inline"><i class="fas fa-map-marker-alt"></i> Phnom Penh, Cambodia</span>
+        </div>
+
+        <h1>Salary Data Analysis<br>& Exploratory Data Analysis</h1>
+        <span class="proj-org">Personal Data Analysis Project</span>
+
+        <div class="proj-image">
+    <img src="Salary_data_Analysis Image.png" alt="Salary Data Analysis Dashboard Preview">
+</div>
+
+        <div class="proj-layout">
+            <div class="proj-content">
+
+                <p>
+                    This project performs a comprehensive <strong>Exploratory Data Analysis (EDA)</strong> on a
+                    real-world salary dataset containing <strong>22,770 records</strong> from multiple companies,
+                    locations, job roles, and employment types. The goal is to uncover salary trends, understand
+                    compensation factors, and answer real business intelligence questions through data-driven
+                    analysis and visualization — including a <strong>4-panel analytics mini dashboard</strong>.
+                </p>
+
+                <h2>Dataset Overview</h2>
+                <div class="dataset-stat-grid">
+                    <div class="ds-box"><span class="num">22,770</span><span class="lbl">Total Records</span></div>
+                    <div class="ds-box"><span class="num">8</span><span class="lbl">Features</span></div>
+                    <div class="ds-box"><span class="num">Multiple</span><span class="lbl">Cities & Roles</span></div>
+                    <div class="ds-box"><span class="num">Real-World</span><span class="lbl">Data Source</span></div>
+                </div>
+                <p>Key columns: <code>job_title</code>, <code>job_roles</code>, <code>salary</code>, <code>location</code>, <code>company_name</code>, <code>rating</code>, <code>employment_status</code>, <code>salaries_reported</code></p>
+
+                <h2>Data Cleaning</h2>
+                <ul>
+                    <li>Loaded and inspected dataset: shape, head, tail, dtypes, describe()</li>
+                    <li>Identified missing values in <code>company_name</code> column</li>
+                    <li>Checked and confirmed no duplicate rows</li>
+                    <li>Standardized column names (lowercase + underscores)</li>
+                    <li><strong>Outlier removal using IQR Method</strong>: calculated Q1, Q3, IQR → removed values below Q1 - 1.5×IQR and above Q3 + 1.5×IQR</li>
+                    <li>Validated outlier removal with before/after boxplot comparison</li>
+                </ul>
+
+                <h2>Business Questions Answered</h2>
+                <div class="questions-grid">
+                    <div class="q-card"><h4>💼 Top Paying Roles</h4><p>Which job roles have the highest average salary?</p></div>
+                    <div class="q-card"><h4>🏙️ City Salary Comparison</h4><p>Which city offers the highest average pay?</p></div>
+                    <div class="q-card"><h4>⭐ Rating vs Salary</h4><p>Does a higher company rating mean better pay?</p></div>
+                    <div class="q-card"><h4>🏢 Top Companies</h4><p>Which companies pay most with 20+ salary reports?</p></div>
+                    <div class="q-card"><h4>📋 Employment Status</h4><p>How does full-time vs part-time affect salary?</p></div>
+                    <div class="q-card"><h4>📊 Salary Trends</h4><p>How does average salary change as rating increases?</p></div>
+                </div>
+
+                <h2>Analysis Highlights</h2>
+                <ul>
+                    <li><strong>Job Role Analysis</strong> — grouped by job_roles, calculated mean salary, sorted and plotted as bar chart</li>
+                    <li><strong>City Salary Ranking</strong> — rainbow-colored horizontal bar chart showing average pay by location</li>
+                    <li><strong>New Delhi Top Companies</strong> — filtered companies in New Delhi with rating=5, sorted by salary</li>
+                    <li><strong>Most Reported Job Titles</strong> — identified which job titles have the most salary submissions</li>
+                    <li><strong>Top 10 Companies (20+ reports)</strong> — filtered for reliability, found highest-paying employers</li>
+                    <li><strong>Rating-Salary Correlation</strong> — computed Pearson correlation + regression plot with trend line</li>
+                    <li><strong>Employment Status Impact</strong> — full descriptive stats breakdown by employment type</li>
+                    <li><strong>Salary Trend by Rating</strong> — line chart showing average salary movement across all rating levels</li>
+                </ul>
+
+                <h2>Mini Analytics Dashboard</h2>
+                <p>Built a 4-panel dashboard using Matplotlib subplots to present all key findings in one view:</p>
+                <div class="dashboard-grid">
+                    <div class="dash-panel"><i class="fas fa-chart-area"></i><h4>Salary Distribution</h4><p>Histogram with KDE showing overall pay spread</p></div>
+                    <div class="dash-panel"><i class="fas fa-dot-circle"></i><h4>Rating vs Salary</h4><p>Scatter plot + red regression trend line</p></div>
+                    <div class="dash-panel"><i class="fas fa-chart-line"></i><h4>Avg Salary by Rating</h4><p>Line chart showing salary trend across ratings</p></div>
+                    <div class="dash-panel"><i class="fas fa-chart-bar"></i><h4>Avg Salary by City</h4><p>Bar chart comparing pay across locations</p></div>
+                </div>
+
+                <h2>Key Findings</h2>
+                <div class="finding-card"><h4>💼 Data roles pay well</h4><p>Data Science and Engineering-related job roles consistently rank among the highest-paying categories in the dataset.</p></div>
+                <div class="finding-card"><h4>🏙️ Location matters significantly</h4><p>Metro cities like New Delhi offer substantially higher average salaries compared to smaller cities.</p></div>
+                <div class="finding-card"><h4>⭐ Rating weakly correlates with salary</h4><p>There is a slight positive correlation between company rating and salary — but it is weak, meaning high-rated companies don't always pay the most.</p></div>
+                <div class="finding-card"><h4>📋 Employment type has a big impact</h4><p>Full-time employees earn considerably more on average than part-time or contract workers in the same roles.</p></div>
+                <div class="finding-card"><h4>📊 After IQR outlier removal</h4><p>The salary distribution becomes more normally shaped, making statistical analysis more reliable and representative.</p></div>
+
+                <h2>What I Learned</h2>
+                <p>
+                    This project taught me how to apply the IQR method for outlier detection and removal,
+                    use <code>groupby</code> aggregations to answer business intelligence questions, create
+                    publication-quality visualizations with Seaborn and Matplotlib, interpret Pearson
+                    correlation in a real-world context, and organize multiple charts into a coherent
+                    analytics dashboard. It strengthened my ability to think like a data analyst and
+                    translate raw data into meaningful business insights.
+                </p>
+
+                <div class="proj-bottom-nav">
+                    <a href="hr-attrition.html" class="proj-nav-link"><i class="fas fa-arrow-left"></i> Previous Project</a>
+                    <a href="../index.html#projects" class="proj-nav-link">All Projects <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="proj-sidebar">
+                <div class="proj-sidebar-card">
+                    <h3>Technologies Used</h3>
+                    <div class="tech-chips">
+                        <span class="tech-chip">Python 3</span>
+                        <span class="tech-chip">Pandas</span>
+                        <span class="tech-chip">NumPy</span>
+                        <span class="tech-chip">Matplotlib</span>
+                        <span class="tech-chip">Seaborn</span>
+                        <span class="tech-chip">IQR Method</span>
+                        <span class="tech-chip">Jupyter Notebook</span>
+                    </div>
+                </div>
+                <div class="proj-sidebar-card">
+                    <h3>Key Highlights</h3>
+                    <ul class="highlight-list">
+                        <li><i class="fas fa-check-circle"></i> 22,770 real-world salary records analyzed</li>
+                        <li><i class="fas fa-check-circle"></i> Outlier removal using IQR method</li>
+                        <li><i class="fas fa-check-circle"></i> 6+ business intelligence questions answered</li>
+                        <li><i class="fas fa-check-circle"></i> Rating vs salary regression analysis</li>
+                        <li><i class="fas fa-check-circle"></i> Employment status impact on compensation</li>
+                        <li><i class="fas fa-check-circle"></i> 4-panel mini analytics dashboard built</li>
+                    </ul>
+                </div>
+                <div class="proj-sidebar-card">
+                    <h3>Links</h3>
+                    <a href="https://github.com/Vannara22" target="_blank" class="proj-link-btn"><i class="fab fa-github"></i> View on GitHub</a>
+                </div>
+                <div class="author-card">
+                    <div class="author-avatar"><img src="../image/my photo.jpg" alt="Vannara" onerror="this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>'"></div>
+                    <div class="author-name">Niem Vannara</div>
+                    <div class="author-role">Data Science & Engineering · RUPP Gen 4</div>
+                    <div class="author-links">
+                        <a href="https://github.com/Vannara22" target="_blank" class="author-link"><i class="fab fa-github"></i></a>
+                        <a href="../index.html#contact" class="author-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const t=document.getElementById('themeToggle'),i=document.getElementById('themeIcon'),h=document.documentElement,s=localStorage.getItem('theme')||'dark';
+    h.setAttribute('data-theme',s);i.className=s==='dark'?'fas fa-sun':'fas fa-moon';
+    t.addEventListener('click',()=>{const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);i.className=n==='dark'?'fas fa-sun':'fas fa-moon';});
+</script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Attrition Analysis — Niem Vannara</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body{background:var(--bg-primary)}.proj-page{padding:100px 0 80px;min-height:100vh}.back-btn{display:inline-flex;align-items:center;gap:8px;color:var(--accent-light);text-decoration:none;font-size:.88rem;font-weight:600;margin-bottom:32px;transition:gap .3s}.back-btn:hover{gap:14px}.proj-label-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}.proj-type-tag{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:4px 12px;border-radius:20px;background:var(--accent-glow);color:var(--accent-light)}.proj-meta-inline{font-size:.82rem;color:var(--text-muted);display:flex;align-items:center;gap:6px}.proj-meta-inline i{font-size:.75rem}.dot{color:var(--border)}.proj-page h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--text-primary);margin-bottom:10px;line-height:1.15}.proj-org{font-size:1rem;color:var(--accent-light);font-weight:600;margin-bottom:32px;display:block}.proj-image{width:100%;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:40px;background:var(--bg-card);display:flex;align-items:center;justify-content:center;min-height:220px;overflow:hidden}.proj-image img{width:100%;border-radius:var(--radius);display:block}.proj-image-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:60px;color:var(--text-muted)}.proj-image-placeholder i{font-size:3rem;color:var(--accent-light);opacity:.4}.proj-image-placeholder p{font-size:.85rem;text-align:center}.proj-layout{display:grid;grid-template-columns:1fr 320px;gap:40px;align-items:start}.proj-sidebar-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:18px}.proj-sidebar-card h3{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:14px}.tech-chips{display:flex;flex-wrap:wrap;gap:7px}.tech-chip{background:var(--accent-glow);color:var(--accent-light);padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600}.highlight-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px}.highlight-list li{display:flex;align-items:flex-start;gap:8px;font-size:.85rem;color:var(--text-secondary);line-height:1.6}.highlight-list li i{color:var(--green);font-size:.75rem;margin-top:4px;flex-shrink:0}.proj-link-btn{display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-secondary);color:var(--text-primary);text-decoration:none;font-size:.88rem;font-weight:600;transition:all .3s;margin-bottom:10px}.proj-link-btn:hover{border-color:var(--accent);color:var(--accent-light)}.proj-link-btn i{color:var(--accent-light);width:18px;text-align:center}.author-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;text-align:center}.author-avatar{width:56px;height:56px;border-radius:50%;background:var(--accent-glow);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.4rem;color:var(--accent-light);overflow:hidden}.author-avatar img{width:100%;height:100%;object-fit:cover}.author-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;color:var(--text-primary);margin-bottom:4px}.author-role{font-size:.78rem;color:var(--text-muted);margin-bottom:14px}.author-links{display:flex;justify-content:center;gap:8px}.author-link{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;font-size:.85rem;transition:all .3s}.author-link:hover{border-color:var(--accent);color:var(--accent-light)}.proj-content h2{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:var(--text-primary);margin:36px 0 14px}.proj-content h2:first-child{margin-top:0}.proj-content p{color:var(--text-secondary);line-height:1.85;margin-bottom:14px;font-size:.93rem}.proj-content ul{list-style:none;padding:0;margin-bottom:16px;display:flex;flex-direction:column;gap:8px}.proj-content ul li{padding-left:18px;position:relative;color:var(--text-secondary);font-size:.9rem;line-height:1.7}.proj-content ul li::before{content:'▸';position:absolute;left:0;color:var(--accent-light)}
+        .models-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+        .model-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px}
+        .model-card h4{font-size:.82rem;font-weight:700;color:var(--text-primary);margin-bottom:4px}
+        .model-card p{font-size:.78rem;color:var(--text-muted);margin:0;line-height:1.5}
+        .metric-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+        .metric-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;flex:1;min-width:100px;text-align:center}
+        .metric-box .num{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--accent-light);display:block}
+        .metric-box .lbl{font-size:.72rem;color:var(--text-muted)}
+        .insight-box{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(6,182,212,.05));border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;margin:10px 0}
+        .insight-box h4{font-size:.82rem;font-weight:700;color:var(--accent-light);margin-bottom:6px}
+        .insight-box p{font-size:.84rem;color:var(--text-secondary);margin:0;line-height:1.6}
+        .proj-bottom-nav{display:flex;justify-content:space-between;align-items:center;padding-top:40px;margin-top:40px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
+        .proj-nav-link{display:inline-flex;align-items:center;gap:8px;color:var(--accent-light);text-decoration:none;font-size:.88rem;font-weight:600;padding:10px 18px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-card);transition:all .3s}
+        .proj-nav-link:hover{border-color:var(--accent)}
+        @media(max-width:900px){.proj-layout{grid-template-columns:1fr}.models-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo"><a href="../index.html" style="text-decoration:none;"><span class="logo-text">AURA<span class="logo-accent">Jr</span></span></a></div>
+        <div class="nav-right"><button class="theme-toggle" id="themeToggle"><i class="fas fa-sun" id="themeIcon"></i></button></div>
+    </div>
+</nav>
+
+<div class="proj-page">
+    <div class="container">
+        <a href="../index.html#projects" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+
+        <div class="proj-label-row">
+            <span class="proj-type-tag">Machine Learning · EDA</span>
+            <span class="proj-meta-inline"><i class="far fa-calendar-alt"></i> 2024</span>
+            <span class="dot">·</span>
+            <span class="proj-meta-inline"><i class="fas fa-map-marker-alt"></i> Phnom Penh, Cambodia</span>
+        </div>
+
+        <h1>HR Employee Attrition<br>Analysis & Prediction</h1>
+        <span class="proj-org">Personal Machine Learning Project</span>
+
+        <div class="proj-image">
+    <img src="HR graph Image.png" alt="HR Attrition Analysis Preview">
+</div>
+
+        <div class="proj-layout">
+            <div class="proj-content">
+
+                <p>
+                    This project analyzes HR employee attrition data to identify key factors that drive
+                    employees to leave a company, and builds <strong>8 machine learning classification models</strong>
+                    to predict whether an employee is likely to stay or leave. Employee attrition is a
+                    critical and costly business problem — this project uses data science to help HR
+                    teams understand and proactively address turnover risks.
+                </p>
+
+                <h2>Project Overview</h2>
+                <p>
+                    Using a real HR dataset with 35 employee features (age, income, overtime, job satisfaction,
+                    distance from home, etc.), this project walks through a complete ML pipeline: data exploration,
+                    cleaning, visualization, model training, evaluation, and hyperparameter tuning.
+                    The focus is on identifying which factors most strongly predict employee departure.
+                </p>
+
+                <div class="metric-row">
+                    <div class="metric-box"><span class="num">35</span><span class="lbl">Features</span></div>
+                    <div class="metric-box"><span class="num">8</span><span class="lbl">ML Models</span></div>
+                    <div class="metric-box"><span class="num">70/30</span><span class="lbl">Train/Test Split</span></div>
+                    <div class="metric-box"><span class="num">5-Fold</span><span class="lbl">Cross Validation</span></div>
+                </div>
+
+                <h2>Exploratory Data Analysis (EDA)</h2>
+                <p>
+                    Before building models, a thorough EDA was conducted to understand the dataset and
+                    identify which features are most associated with attrition.
+                </p>
+                <ul>
+                    <li>Plotted histograms for all 30 numeric features (6×5 grid layout)</li>
+                    <li><strong>Attrition Distribution</strong> — revealed class imbalance: more employees stayed than left</li>
+                    <li><strong>Correlation Heatmap</strong> — identified strongly correlated numeric features</li>
+                    <li><strong>Attrition vs Monthly Income</strong> — lower income employees leave more often</li>
+                    <li><strong>Attrition vs Age</strong> — younger employees (25–35) show higher attrition</li>
+                    <li><strong>Attrition vs OverTime</strong> — employees working overtime leave significantly more</li>
+                    <li><strong>Attrition vs Distance from Home</strong> — longer commutes correlate with higher attrition</li>
+                    <li><strong>Satisfaction Scores</strong> — analyzed Job, Environment, Relationship, and Involvement satisfaction</li>
+                </ul>
+
+                <h2>Data Preprocessing</h2>
+                <ul>
+                    <li>Dropped uninformative columns: <code>EmployeeCount</code>, <code>EmployeeNumber</code>, <code>Over18</code>, <code>StandardHours</code></li>
+                    <li>Encoded all categorical variables using <strong>Label Encoding</strong></li>
+                    <li>Applied <strong>Z-score StandardScaler</strong> for feature normalization</li>
+                    <li>Stratified 70/30 train-test split to maintain class balance</li>
+                </ul>
+
+                <h2>Machine Learning Models</h2>
+                <p>8 classification algorithms were trained and evaluated to find the best performer:</p>
+                <div class="models-grid">
+                    <div class="model-card"><h4>🔵 Gaussian Naive Bayes</h4><p>Probabilistic baseline using feature independence assumption</p></div>
+                    <div class="model-card"><h4>🔵 Bernoulli Naive Bayes</h4><p>Binary feature variant of Naive Bayes</p></div>
+                    <div class="model-card"><h4>🟢 Logistic Regression</h4><p>Linear classification model as a strong baseline</p></div>
+                    <div class="model-card"><h4>🟡 K-Nearest Neighbors</h4><p>Distance-based classifier with k=5 neighbors</p></div>
+                    <div class="model-card"><h4>🟠 Decision Tree</h4><p>Rule-based interpretable tree model</p></div>
+                    <div class="model-card"><h4>🔴 Random Forest</h4><p>200-tree ensemble — strong generalization</p></div>
+                    <div class="model-card"><h4>🟣 SVC (RBF Kernel)</h4><p>Support Vector Classifier with radial basis function</p></div>
+                    <div class="model-card"><h4>🟣 Linear SVC</h4><p>Linear boundary SVM for high-dimensional data</p></div>
+                </div>
+
+                <h2>Model Evaluation</h2>
+                <p>
+                    Each model was evaluated using 5 metrics. <strong>Recall was prioritized</strong> as
+                    the most important metric — missing an employee who will leave (false negative) is
+                    more costly to a business than a false alarm (false positive).
+                </p>
+                <ul>
+                    <li><strong>Accuracy</strong> — overall percentage of correct predictions</li>
+                    <li><strong>Precision</strong> — how many predicted leavers actually left</li>
+                    <li><strong>Recall</strong> — how many actual leavers were correctly identified ⭐ key metric</li>
+                    <li><strong>Specificity</strong> — how well the model identifies employees who stay</li>
+                    <li><strong>F1 Score</strong> — harmonic mean of precision and recall</li>
+                    <li><strong>Confusion Matrix</strong> — detailed breakdown per model</li>
+                </ul>
+
+                <h2>Hyperparameter Tuning</h2>
+                <p>
+                    Applied <strong>GridSearchCV with 5-fold cross-validation</strong> to fine-tune the SVC model.
+                    Tuned parameters: <code>C</code> (regularization), <code>kernel</code> (linear, rbf, poly),
+                    and <code>gamma</code> (scale, auto). The grid search identified the optimal combination
+                    of parameters that maximized cross-validated performance.
+                </p>
+
+                <h2>Key Findings</h2>
+
+                <div class="insight-box">
+                    <h4>💰 Income is a major driver</h4>
+                    <p>Employees with lower monthly income show significantly higher attrition rates. Compensation is one of the strongest predictors of turnover.</p>
+                </div>
+                <div class="insight-box">
+                    <h4>⏰ Overtime doubles attrition risk</h4>
+                    <p>Employees who frequently work overtime are far more likely to leave — suggesting burnout as a key factor.</p>
+                </div>
+                <div class="insight-box">
+                    <h4>👶 Young employees leave more</h4>
+                    <p>Employees aged 25–35 show the highest attrition rates — likely seeking better opportunities or growth.</p>
+                </div>
+                <div class="insight-box">
+                    <h4>😔 Low satisfaction = higher risk</h4>
+                    <p>Low job satisfaction, environment satisfaction, and low involvement all strongly correlate with attrition.</p>
+                </div>
+
+                <h2>What I Learned</h2>
+                <p>
+                    This was my most comprehensive ML project to date. I learned how to build and compare
+                    8 different classification models systematically, why Recall matters more than Accuracy
+                    for imbalanced real-world problems, how to use GridSearchCV for hyperparameter optimization,
+                    and how to communicate model results using confusion matrices and metric tables.
+                    Most importantly, I learned how data science can solve real HR business challenges.
+                </p>
+
+                <div class="proj-bottom-nav">
+                    <a href="customer-shopping.html" class="proj-nav-link"><i class="fas fa-arrow-left"></i> Previous Project</a>
+                    <a href="salary-analysis.html" class="proj-nav-link">Next Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="proj-sidebar">
+                <div class="proj-sidebar-card">
+                    <h3>Technologies Used</h3>
+                    <div class="tech-chips">
+                        <span class="tech-chip">Python 3</span>
+                        <span class="tech-chip">Pandas</span>
+                        <span class="tech-chip">NumPy</span>
+                        <span class="tech-chip">Scikit-learn</span>
+                        <span class="tech-chip">Matplotlib</span>
+                        <span class="tech-chip">Seaborn</span>
+                        <span class="tech-chip">GridSearchCV</span>
+                        <span class="tech-chip">Jupyter Notebook</span>
+                    </div>
+                </div>
+                <div class="proj-sidebar-card">
+                    <h3>Key Highlights</h3>
+                    <ul class="highlight-list">
+                        <li><i class="fas fa-check-circle"></i> 8 ML models trained and compared</li>
+                        <li><i class="fas fa-check-circle"></i> Full EDA with 10+ visualizations</li>
+                        <li><i class="fas fa-check-circle"></i> Recall-focused evaluation strategy</li>
+                        <li><i class="fas fa-check-circle"></i> Label encoding + StandardScaler preprocessing</li>
+                        <li><i class="fas fa-check-circle"></i> GridSearchCV hyperparameter tuning</li>
+                        <li><i class="fas fa-check-circle"></i> Identified top attrition risk factors</li>
+                    </ul>
+                </div>
+                <div class="proj-sidebar-card">
+                    <h3>Links</h3>
+                    <a href="https://github.com/Vannara22" target="_blank" class="proj-link-btn"><i class="fab fa-github"></i> View on GitHub</a>
+                </div>
+                <div class="author-card">
+                    <div class="author-avatar"><img src="../image/my photo.jpg" alt="Vannara" onerror="this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>'"></div>
+                    <div class="author-name">Niem Vannara</div>
+                    <div class="author-role">Data Science & Engineering · RUPP Gen 4</div>
+                    <div class="author-links">
+                        <a href="https://github.com/Vannara22" target="_blank" class="author-link"><i class="fab fa-github"></i></a>
+                        <a href="../index.html#contact" class="author-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const t=document.getElementById('themeToggle'),i=document.getElementById('themeIcon'),h=document.documentElement,s=localStorage.getItem('theme')||'dark';
+    h.setAttribute('data-theme',s);i.className=s==='dark'?'fas fa-sun':'fas fa-moon';
+    t.addEventListener('click',()=>{const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);i.className=n==='dark'?'fas fa-sun':'fas fa-moon';});
+</script>
+</body>
+</html>
