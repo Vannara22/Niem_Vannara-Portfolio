@@ -74,6 +74,12 @@ function updateActiveNav() {
 window.addEventListener('scroll', updateActiveNav);
 
 // ---- Skills Tabs ----
+// First, save all original widths as data attributes
+document.querySelectorAll('.skill-progress').forEach(bar => {
+    bar.setAttribute('data-target', bar.style.width);
+    bar.style.width = '0%';
+});
+
 const tabs   = document.querySelectorAll('.skills-tab');
 const panels = document.querySelectorAll('.skills-panel');
 
@@ -85,9 +91,8 @@ tabs.forEach(tab => {
         const panel = document.getElementById(`tab-${tab.dataset.tab}`);
         if (panel) {
             panel.classList.add('active');
-            // Animate skill bars in the new panel
             panel.querySelectorAll('.skill-progress').forEach(bar => {
-                const target = bar.style.width;
+                const target = bar.getAttribute('data-target'); // ← always correct
                 bar.style.width = '0%';
                 setTimeout(() => { bar.style.width = target; }, 100);
             });
@@ -95,20 +100,13 @@ tabs.forEach(tab => {
     });
 });
 
-// ---- Skill bars animation on scroll ----
-const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.querySelectorAll('.skill-progress').forEach(bar => {
-                const target = bar.style.width;
-                bar.style.width = '0%';
-                setTimeout(() => { bar.style.width = target; }, 200);
-            });
-        }
+// Animate the first tab on load
+const firstPanel = document.getElementById('tab-languages');
+if (firstPanel) {
+    firstPanel.querySelectorAll('.skill-progress').forEach(bar => {
+        setTimeout(() => { bar.style.width = bar.getAttribute('data-target'); }, 300);
     });
-}, { threshold: 0.3 });
-
-document.querySelectorAll('.skills-panel').forEach(panel => skillObserver.observe(panel));
+}
 
 // ---- Project Cards reveal on scroll ----
 const projectObserver = new IntersectionObserver((entries) => {
