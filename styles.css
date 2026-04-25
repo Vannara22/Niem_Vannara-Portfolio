@@ -510,14 +510,7 @@ section { padding: 90px 0; }
 }
 .skill-name i { color: var(--accent-light); }
 .skill-pct { font-size: 0.8rem; font-weight: 700; color: var(--accent-light); }
-.skill-bar {
-    height: 7px; background: var(--border); border-radius: 4px; overflow: hidden;
-}
-.skill-progress {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    border-radius: 4px; width: 0; transition: width 1.2s ease;
-}
+
 
 /* Tools grid */
 .tools-icon-grid {
